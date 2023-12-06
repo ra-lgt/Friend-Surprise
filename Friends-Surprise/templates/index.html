@@ -19,26 +19,26 @@
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="{{url_for('static',filename='/vendor/aos/aos.css')}}" rel="stylesheet">
+  <link href="{{url_for('static',filename='/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static',filename='/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{url_for('static',filename='/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static',filename='/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static',filename='/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+  <link href="{{url_for('static',filename='/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="{{url_for('static',filename='/css/style.css')}}" rel="stylesheet">
     <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="{{url_for('static',filename='/vendor/purecounter/purecounter_vanilla.js')}}"></script>
+  <script src="{{url_for('static',filename='/vendor/aos/aos.js')}}"></script>
+  <script src="{{url_for('static',filename='/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static',filename='/vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{url_for('static',filename='/vendor/swiper/swiper-bundle.min.js')}}"></script>
+  <script src="{{url_for('static',filename='/vendor/php-email-form/validate.js')}}"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="{{url_for('static',filename='/js/main.js')}}"></script>
 
 
 <!--
@@ -51,9 +51,9 @@ https://templatemo.com/tm-570-chain-app-dev
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/templatemo-chain-app-dev.css">
-    <link rel="stylesheet" href="assets/css/animated.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/templatemo-chain-app-dev.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/animated.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/owl.css')}}">
 
   </head>
 
@@ -80,7 +80,7 @@ https://templatemo.com/tm-570-chain-app-dev
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
             <a href="index.html" class="logo">
-              <img src="assets/images/logo.png" alt="Chain App Dev">
+              <img src="{{url_for('static',filename='/images/logo.png')}}" alt="Chain App Dev">
             </a>
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
@@ -90,9 +90,9 @@ https://templatemo.com/tm-570-chain-app-dev
               <li class="scroll-to-section"><a href="#about">Create Event</a></li>
               <li class="scroll-to-section"><a href="#pricing">Message</a></li>
               <li class="scroll-to-section"><a href="#newsletter">Profile</a></li>
-              <li><div class="gradient-button"><a id="modal_trigger" href="#modal"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li> 
+              <li><div class="gradient-button"><a id="modal_trigger" href="{{url_for('signup_login')}}"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li> 
             </ul>        
-            <a class='menu-trigger'>
+            <a class="menu-trigger">
                 <span>Menu</span>
             </a>
             <!-- ***** Menu End ***** -->
@@ -199,7 +199,7 @@ https://templatemo.com/tm-570-chain-app-dev
                 <div class="row">
                   <div class="col-lg-12">
                     <h2>Surprises Await, Smiles Abound</h2>
-                    <p>Embrace the thrill, spin the wheel of friendship's delight with SurpriseRoulette! Because joy is best when it's a surprise for both giver and receive</p>
+                    <p>Embrace the thrill, spin the wheel of friendships delight with SurpriseRoulette! Because joy is best when it a surprise for both giver and receive</p>
                   </div>
                   <div class="col-lg-12">
                     <div class="white-button first-button scroll-to-section">
@@ -214,7 +214,8 @@ https://templatemo.com/tm-570-chain-app-dev
             </div>
             <div class="col-lg-6">
               <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
-                <img src="assets/images/slider-dec.png" alt="">
+                <img src="{{url_for ('static',filename='/images/slider-dec.png')}}" alt="">
+
               </div>
             </div>
           </div>
@@ -229,7 +230,7 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="col-lg-8 offset-lg-2">
           <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
             <h4>Amazing <em>Services &amp; Features</em> for you</h4>
-            <img src="assets/images/heading-line-dec.png" alt="">
+            <img src="{{url_for('static',filename='/images/heading-line-dec.png')}}" alt="">
             <p>If you need the greatest collection of HTML templates for your business, please visit <a rel="nofollow" href="https://www.toocss.com/" target="_blank">TooCSS</a> Blog. If you need to have a contact form PHP script, go to <a href="https://templatemo.com/contact" target="_parent">our contact page</a> for more information.</p>
           </div>
         </div>
@@ -287,7 +288,7 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="col-lg-6 align-self-center">
           <div class="section-heading">
             <h4>About <em>What We Do</em> &amp; Who We Are</h4>
-            <img src="assets/images/heading-line-dec.png" alt="">
+            <img src="{{url_for('static',filename='/images/heading-line-dec.png')}}" alt="">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eismod tempor incididunt ut labore et dolore magna.</p>
           </div>
           <div class="row">
@@ -326,7 +327,7 @@ https://templatemo.com/tm-570-chain-app-dev
         </div>
         <div class="col-lg-6">
           <div class="right-image">
-            <img src="assets/images/about-right-dec.png" alt="">
+            <img src="{{url_for('static',filename='/images/about-right-dec.png')}}" alt="">
           </div>
         </div>
       </div>
@@ -338,23 +339,92 @@ https://templatemo.com/tm-570-chain-app-dev
 
         <div class="row content">
           <div class="col-md-4" data-aos="fade-right">
-            <img src="assets/img/details-1.png" class="img-fluid" alt="">
+            <img src="{{url_for('static',filename='/img/details-1.png')}}" class="img-fluid" alt="">
           </div>
           <div class="col-md-8 pt-4" data-aos="fade-up">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+            <h3>User-Register/Signin</h3>
             <p class="fst-italic">
+              
+Welcome to "Randomly Surprised" – the ultimate platform for joyous, unexpected moments among friends! Whether you're a fan of spontaneous gifts, heartwarming messages, or delightful experiences, our platform is designed to add a touch of excitement to your relationships.
+            </p>
+            <ul>
+              <li><i class="bi bi-check"></i> Begin your journey by clicking on the "Sign Up" button prominently displayed on our homepage.</li>
+              <li><i class="bi bi-check"></i> Input your essential details – your full name, a valid email address, and a secure password.</li>
+              <li><i class="bi bi-check"></i>Hit the "Sign Up" or "Create Account" button to submit your registration and officially join the "Randomly Surprised" community.</li>
+              <li><i class="bi bi-check"></i>Check your inbox for a verification link.
+Click on the link to validate your email address and unlock the full potential of surprises.</li>
+<li><i class="bi bi-check"></i>
+              Log in to your newly created account and add the finishing touches to your profile, making your surprises even more personalized.
+            </li>
+            </ul>
+            
+          </div>
+        </div>
+        <div class="row content">
+          <div class="col-md-4 order-1 order-md-2" data-aos="fade-left">
+            <img src="{{url_for('static',filename='/img/details-2.png')}}" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-8 pt-5 order-2 order-md-1" data-aos="fade-up">
+            <h3>Building Your Friend Community </h3>
+            <p>
+              Welcome to the heart of "Randomly Surprised" – where friendships flourish, and surprises come to life! Our platform not only connects you with friends but also lets you curate unforgettable moments together.
+            </p>
+                  <ul>
+              <li><i class="bi bi-check"></i> Navigate to the "Find" section on the platform.
+Use the search feature to look for your friends by their names or email addresses.</li>
+              <li><i class="bi bi-check"></i> Once you've found your friends, send them invitations to connect.Click on the "Connect" or "Send Invitation" button next to their profiles.</li>
+              <li><i class="bi bi-check"></i>Your friends will receive the invitations and can choose to accept or decline.</li>
+              <li><i class="bi bi-check"></i>Once your friends accept the invitations, you are now connected on "Randomly Surprised</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row content">
+          <div class="col-md-4" data-aos="fade-right">
+            <img src="{{url_for('static',filename='/img/details-3.png')}}" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-8 pt-5" data-aos="fade-up">
+            <h3>Create Event</h3>
+            <p>creating memorable events with your friends is just a few clicks away! Here's a step-by-step guide on how to effortlessly bring your friends together for a surprise-filled occasion</p>
+            <ul>
+              <li><i class="bi bi-check"></i> Locate and click on the "Create Event" button prominently displayed on the platform.</li>
+              <li><i class="bi bi-check"></i> Enter the name of your event in the designated field.
+Choose the date for the event to occur using the calendar feature.</li>
+              <li><i class="bi bi-check"></i> After entering the event details, click on the "Create" button to proceed.</li>
+              <li><i class="bi bi-check"></i> You'll be prompted to select friends to include in the event.Browse through your connected friends and choose those you want to invite.</li>
+
+              <li><i class="bi bi-check"></i> After selecting the friends for your event, click on the "Create" button once again to finalize the event details.</li>
+
+              <li><i class="bi bi-check"></i> You'll receive a confirmation message indicating that your event has been successfully created.</li>
+            </ul>
+           
+          </div>
+        </div>
+
+        <div class="row content">
+          <div class="col-md-4 order-1 order-md-2" data-aos="fade-left">
+            <img src="{{url_for('static',filename='/img/details-4.png')}}" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-8 pt-5 order-2 order-md-1" data-aos="fade-up">
+            <h3>Unveil the Magic</h3>
+       <!--      <p class="fst-italic">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
               magna aliqua.
             </p>
-            <ul>
-              <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="bi bi-check"></i> Iure at voluptas aspernatur dignissimos doloribus repudiandae.</li>
-              <li><i class="bi bi-check"></i> Est ipsa assumenda id facilis nesciunt placeat sed doloribus praesentium.</li>
-            </ul>
             <p>
-              Voluptas nisi in quia excepturi nihil voluptas nam et ut. Expedita omnis eum consequatur non. Sed in asperiores aut repellendus. Error quisquam ab maiores. Quibusdam sit in officia
-            </p>
+              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              culpa qui officia deserunt mollit anim id est laborum
+            </p> -->
+            <ul>
+              <li><i class="bi bi-check"></i> Buckle up for a ride of delightful surprises as our algorithm works its magic to decide who will be exchanging gifts or surprises with whom. It's the anticipation that makes the journey exciting!</li>
+
+              <li><i class="bi bi-check"></i> Brace yourself for an exhilarating process where we keep the details under wraps until the last moment. The element of surprise is the heart of our game, ensuring every moment is filled with suspense and joy.</li>
+
+              <li><i class="bi bi-check"></i> As the event date approaches, be on the lookout for a notification that will reveal the thrilling information about whom you are set to surprise. It's like unwrapping a gift of anticipation and excitement!</li>
+
+              <li><i class="bi bi-check"></i>Here's the twist – no one, and we mean no one, knows who will be surprising whom until the big reveal. It's the mystery that adds a whole new level of intrigue to your "Randomly Surprised" experience. Get ready to keep everyone guessing!</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -368,7 +438,7 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="col-lg-8 offset-lg-2">
           <div class="section-heading">
             <h4>Check What <em>The Clients Say</em> About Our App Dev</h4>
-            <img src="assets/images/heading-line-dec.png" alt="">
+            <img src="{{url_for('static',filename='/images/heading-line-dec.png')}}" alt="">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eismod tempor incididunt ut labore et dolore magna.</p>
           </div>
         </div>
@@ -493,12 +563,12 @@ https://templatemo.com/tm-570-chain-app-dev
                           <div class="row">
                             <div class="col-lg-12">
                               <div class="client-content">
-                                <img src="assets/images/quote.png" alt="">
+                                <img src="{{url_for('static',filename='/images/quote.png')}}" alt="">
                                 <p>“Lorem ipsum dolor sit amet, consectetur adpiscing elit, sed do eismod tempor idunte ut labore et dolore magna aliqua darwin kengan
                                   lorem ipsum dolor sit amet, consectetur picing elit massive big blasta.”</p>
                               </div>
                               <div class="down-content">
-                                <img src="assets/images/client-image.jpg" alt="">
+                                <img src="{{url_for('static',filename='/images/client-image.jpg')}}" alt="">
                                 <div class="right-content">
                                   <h4>David Martino</h4>
                                   <span>CEO of David Company</span>
@@ -515,12 +585,12 @@ https://templatemo.com/tm-570-chain-app-dev
                           <div class="row">
                             <div class="col-lg-12">
                               <div class="client-content">
-                                <img src="assets/images/quote.png" alt="">
+                               <img src="{{ url_for('static', filename='/images/quote.png') }}" alt="">
                                 <p>“CTO, Lorem ipsum dolor sit amet, consectetur adpiscing elit, sed do eismod tempor idunte ut labore et dolore magna aliqua darwin kengan
                                   lorem ipsum dolor sit amet, consectetur picing elit massive big blasta.”</p>
                               </div>
                               <div class="down-content">
-                                <img src="assets/images/client-image.jpg" alt="">
+                                <img src="{{url_for('static',filename='/imagesclient-image.jpg')}}" alt="">
                                 <div class="right-content">
                                   <h4>Jake H. Nyo</h4>
                                   <span>CTO of Digital Company</span>
@@ -537,12 +607,12 @@ https://templatemo.com/tm-570-chain-app-dev
                           <div class="row">
                             <div class="col-lg-12">
                               <div class="client-content">
-                                <img src="assets/images/quote.png" alt="">
+                                <img src="{{url_for('static',filename='/images/quote.png')}}" alt="">
                                 <p>“May, Lorem ipsum dolor sit amet, consectetur adpiscing elit, sed do eismod tempor idunte ut labore et dolore magna aliqua darwin kengan
                                   lorem ipsum dolor sit amet, consectetur picing elit massive big blasta.”</p>
                               </div>
                               <div class="down-content">
-                                <img src="assets/images/client-image.jpg" alt="">
+                                <img src="{{url_for('static',filename='/images/client-image.jpg')}}" alt="">
                                 <div class="right-content">
                                   <h4>May C.</h4>
                                   <span>Founder of Catherina Co.</span>
@@ -559,12 +629,12 @@ https://templatemo.com/tm-570-chain-app-dev
                           <div class="row">
                             <div class="col-lg-12">
                               <div class="client-content">
-                                <img src="assets/images/quote.png" alt="">
+                                <img src="{{url_for('static',filename='/images/quote.png')}}" alt="">
                                 <p>“Lorem ipsum dolor sit amet, consectetur adpiscing elit, sed do eismod tempor idunte ut labore et dolore magna aliqua darwin kengan
                                   lorem ipsum dolor sit amet, consectetur picing elit massive big blasta.”</p>
                               </div>
                               <div class="down-content">
-                                <img src="assets/images/client-image.jpg" alt="">
+                                <img src="{{url_for('static',filename='/images/client-image.jpg')}}" alt="">
                                 <div class="right-content">
                                   <h4>Random Staff</h4>
                                   <span>Manager, Digital Company</span>
@@ -581,12 +651,12 @@ https://templatemo.com/tm-570-chain-app-dev
                           <div class="row">
                             <div class="col-lg-12">
                               <div class="client-content">
-                                <img src="assets/images/quote.png" alt="">
+                                <img src="{{url_for('static',filename='/images/quote.png')}}" alt="">
                                 <p>“Mark, Lorem ipsum dolor sit amet, consectetur adpiscing elit, sed do eismod tempor idunte ut labore et dolore magna aliqua darwin kengan
                                   lorem ipsum dolor sit amet, consectetur picing elit massive big blasta.”</p>
                               </div>
                               <div class="down-content">
-                                <img src="assets/images/client-image.jpg" alt="">
+                                <img src="{{url_for('static',filename='/images/client-image.jpg')}}" alt="">
                                 <div class="right-content">
                                   <h4>Mark Am</h4>
                                   <span>CTO, Amber Do Company</span>
@@ -680,7 +750,7 @@ https://templatemo.com/tm-570-chain-app-dev
           <div class="footer-widget">
             <h4>About Our Company</h4>
             <div class="logo">
-              <img src="assets/images/white-logo.png" alt="">
+              <img src="{{url_for('static',filename='/images/white-logo.png')}}" alt="">
             </div>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
           </div>
@@ -697,12 +767,12 @@ https://templatemo.com/tm-570-chain-app-dev
 
 
   <!-- Scripts -->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/animation.js"></script>
-  <script src="assets/js/imagesloaded.js"></script>
-  <script src="assets/js/popup.js"></script>
-  <script src="assets/js/custom.js"></script>
+  <script src="{{url_for('static',filename='/vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{url_for('static',filename='/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static',filename='/js/owl-carousel.js')}}"></script>
+  <script src="{{url_for('static',filename='/js/animation.js')}}"></script>
+  <script src="{{url_for('static',filename='/js/imagesloaded.js')}}"></script>
+  <script src="{{url_for('static',filename='/js/popup.js')}}"></script>
+  <script src="{{url_for('static',filename='/js/custom.js')}}"></script>
 </body>
 </html>
