@@ -36,6 +36,13 @@ def check_email_exists(email):
 def sucess_register():
     return render_template('success.html',data="THANKS FOR REGISTERING")
 
+@app.route('/error')
+def error():
+    data = request.args.get('data')
+    reason = request.args.get('reason')
+    return render_template('error.html',data={"data":data,"reason":reason})
+    
+
 #check for email exists and returns 404
 @app.route('/email_exists')
 def email_exists():
@@ -120,10 +127,38 @@ def signup():
 def signup_login():
     return render_template('signup_login.html')
 
+@app.route('/login',methods=['POST','GET'])
+def login():
+    if(request.method=='POST'):
+        email=request.form['loginemail']
+        password=request.form['loginPassword']
+    
+    try:
+        userauth=firebase_db.sign_in_with_email_and_password(email,password)
+    except:
+        error_url = url_for('error', data="Invalid login", reason="Check your credentials and try again or contact us")
+        return redirect(error_url)
+    
+    cookie=userauth['idToken']
+    session['user_id'] = cookie
+    
+    return redirect(url_for('Home'))
+
+@app.route('/logout')
+def logout():
+    # Clear the user ID from the session
+    session.pop('user_id', None)
+    return redirect(url_for('Home'))
+
 @app.route('/')
 def Home():
-    print("home")
-    return render_template('index.html')
+    session_bool=False
+    
+    if('user_id' in session):
+        session_bool=True
+    
+    
+    return render_template('index.html',session_bool=session_bool)
 
 if __name__ == '__main__':
     app.run(debug=True)

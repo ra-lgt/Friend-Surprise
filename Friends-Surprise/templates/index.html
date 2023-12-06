@@ -85,12 +85,16 @@ https://templatemo.com/tm-570-chain-app-dev
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
+              {% if session_bool %}
               <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
               <li class="scroll-to-section"><a href="#services">Find</a></li>
               <li class="scroll-to-section"><a href="#about">Create Event</a></li>
               <li class="scroll-to-section"><a href="#pricing">Message</a></li>
               <li class="scroll-to-section"><a href="#newsletter">Profile</a></li>
+              <li><div class="gradient-button"><a id="modal_trigger" href="{{url_for('logout')}}"><i class="fa fa-sign-in-alt"></i>Logout</a></div></li> 
+              {% else %}
               <li><div class="gradient-button"><a id="modal_trigger" href="{{url_for('signup_login')}}"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li> 
+              {% endif %}
             </ul>        
             <a class="menu-trigger">
                 <span>Menu</span>
