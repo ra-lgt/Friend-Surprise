@@ -3,6 +3,9 @@ import json
 from Configuration import Config
 from send_email import send_email
 import random
+from Data_CollectionAPI import DataAPI
+from flask_caching import Cache
+from datetime import datetime
 
 app = Flask(__name__)
 config=Config()
@@ -10,6 +13,8 @@ firebase_db=config.Setup_auth()
 mail=send_email()
 app.secret_key = 'Friend-surprise'
 mongo_client=config.create_mong_conn()
+user_dataAPI=DataAPI()
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 
 @app.route('/terms')
@@ -100,12 +105,22 @@ def signup():
 
     db=mongo_client['User-Data']
     collection=db['user_details']
+    current_date = datetime.now()
 
     collection.insert_one({
             'username':data['username'],
             'email':data['email'],
             'phone':data['phone'],
-            'password':data['password']
+            'password':data['password'],
+            'Age':"Not Set",
+            'Address':"Not Set",
+            'About':"Not Set",
+            'first_name':"Not Set",
+            'last_name':"Not Set",
+            'City':"Not Set",
+            'Country':"Not Set",
+            'Postal Code':"Not Set",
+            'Joined_date':current_date.strftime("%Y-%m-%d")
             })
     
     firebase_db.create_user_with_email_and_password(data['email'],data['password'])
@@ -149,6 +164,22 @@ def logout():
     # Clear the user ID from the session
     session.pop('user_id', None)
     return redirect(url_for('Home'))
+
+@app.route('/find_friends')
+def find_friends():
+    all_user_data=None
+    all_user_data = cache.get('cached_all_user_data')
+    
+    if(all_user_data is None):
+        all_user_data=user_dataAPI.get_all_user_data()
+        
+        cache.set('all_user_data', all_user_data, timeout=180 * 60)
+    
+    if not all_user_data:
+        count=0
+    else:
+        count=len(all_user_data['username'])
+    return render_template('find_friends.html',all_user_data=all_user_data,count=count)
 
 @app.route('/')
 def Home():

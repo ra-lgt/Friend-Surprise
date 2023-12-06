@@ -1,3 +1,12 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="{{url_for('static',filename='css/find_friends.css')}}"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+</head>
+
 <div id="sandbox">
 
     <div class="sideb">
@@ -10,15 +19,15 @@
         <div class="sortSection">
         <h3>Sort By:</h3>
         <button class="sort" data-sort="jobTitle">
-      Sort by Job Title
+      Sort by User Name
     </button>
         <button class="sort" data-sort="datePosted">
-      Sort by Date Posted
+      Sort by Joined Date
     </button>
       </div>
       <div class="filterSection">
         <div class="filter">
-          <h3>Filter Opening by Location</h3>
+          <h3>Filter by Country</h3>
           <select id="location-filter" class="location selectlist">
         <option selected="selected" value="">All Locations</option>
         <option value="Hyderabad">Hyderabad</option>
@@ -28,7 +37,7 @@
         <option value="London">London</option>
       </select>
         </div>
-        <div class="filter">
+        <!-- <div class="filter">
           <h3>Filter Opening by Job Type</h3>
           <select id="type-filter" class="jobtypefilter selectlist">
         <option selected="selected" value="">All Job Types</option>
@@ -36,7 +45,7 @@
         <option value="Permanent">Permanent</option>
         <option value="Part Time">Part Time</option>
       </select>
-        </div>
+        </div> -->
       </div>
     </div>
      </div>
@@ -47,6 +56,8 @@
         <ul class="pagination"></ul><span class="jPaginateNext page-arrow">></span></div>
     </div>
   </div>
+  
+  </html>
 
   <script>
     // List.js set-up and initialisation
@@ -57,10 +68,11 @@ var options = {
       "jobType",
       "datePosted",
       "jobLocation",
-      { attr: "href", name: "applyLink" }
+      { attr: "href", name: "applyLink" },
+      { attr: "src", name: "image" }
     ],
     item:
-      '<li><a class="applyLink"><h3 class="jobTitle"></h3></a><div class="bottomBox"><div class="left-part"><p class="jobType"></p><p class="jobLocation"></p></div><div class="dateBox"><p class="datePosted"></p></div></div></li>',
+    '<li><img class="image"><a class="applyLink"><h3 class="jobTitle"></h3></a><div class="bottomBox"><div class="left-part"><button class="jobType"></button><p class="jobLocation"></p></div><div class="dateBox"><h5>Joined Date</h5><p class="datePosted"></p></div></div></li>',
     page: 6,
     pagination: {
       innerWindow: 2,
@@ -71,81 +83,18 @@ var options = {
   };
   
   var values = [
+  {% for i in range(count) %}
+ 
     {
-      jobTitle: "PHP & ASP.NET Developer",
-      jobType: "Full Time",
+      jobTitle: "{{all_user_data['username'][i]}}",
+      jobType: "View More",
       datePosted: "2016-08-19",
       jobLocation:"Hyderabad",
-      applyLink: "#"
+      applyLink: "#",
+      image: "{{url_for('static',filename='images/client-image.png')}}"
     },
-    {
-      jobTitle: "Data Scientist",
-      jobType: "Full Time",
-      jobLocation:"Bengaluru",
-      datePosted: "2018-08-19",
-      applyLink: "#"
-    },
-    {
-      jobTitle: "Business Development Manager",
-      jobType: "Contract",
-      jobLocation:"Bengaluru",
-      datePosted: "2018-07-19",
-      applyLink: "#"
-    },
-  
-    {
-      jobTitle: "Graphic Designer",
-      jobType: "Part Time",
-      jobLocation:"Dubai",
-      datePosted: "2019-07-19",
-      applyLink: "#"
-    },
-  
-    {
-      jobTitle: "Marketing Lead",
-      jobType: "Full Time",
-      jobLocation:"Hyderabad",
-      datePosted: "2018-07-19",
-      applyLink: "#"
-    },
-  
-    {
-      jobTitle: "Motion graphic Artist",
-      jobType: "Full Time",
-      jobLocation:"Hyderabad",
-      datePosted: "2019-02-11",
-      applyLink: "#"
-    },
-  
-    {
-      jobTitle: "Node Js Developer",
-      jobType: "Full Time",
-      jobLocation:"Seattle",
-      datePosted: "2018-07-19",
-      applyLink: "#"
-    },
-  
-    {
-      jobTitle: "Angular & React Developer",
-      jobType: "Part Time",
-      jobLocation:"London",
-      datePosted: "2018-07-19",
-      applyLink: "#"
-    },
-    {
-      jobTitle: "Zseries It Specialist",
-      jobType: "full Time",
-      jobLocation:"Dubai",
-      datePosted: "2014-01-19",
-      applyLink: "#"
-    },
-    {
-      jobTitle: "Senior Content Writer",
-      jobType: "Full Time",
-      jobLocation:"Hyderabad",
-      datePosted: "2018-07-19",
-      applyLink: "#"
-    }
+    {% endfor %}
+
   ];
   
   var userList = new List("sandbox", options, values);
