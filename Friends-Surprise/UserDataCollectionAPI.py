@@ -27,3 +27,15 @@ class DataAPI:
         del user_all_data['_id']
         return user_all_data
     
+    def get_data_of_specific_user(self,email):
+        db = self.mongo_conn["User-Data"]
+        collection=db['user_details']
+        
+        cursor = collection.find({"email":email})
+        
+        for doc in cursor:
+            print(doc)
+        
+        return 1
+        
+        

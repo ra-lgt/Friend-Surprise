@@ -150,6 +150,7 @@ def login():
     
     try:
         userauth=firebase_db.sign_in_with_email_and_password(email,password)
+        session['email']=email
     except:
         error_url = url_for('error', data="Invalid login", reason="Check your credentials and try again or contact us")
         return redirect(error_url)
@@ -165,16 +166,31 @@ def logout():
     session.pop('user_id', None)
     return redirect(url_for('Home'))
 
+@app.route('/profile')
+def profile():
+    user_specific_data=None
+    user_specific_data=cache.get('profile_data')
+    
+    if(user_specific_data is None):
+        user_specific_data=user_dataAPI.get_data_of_specific_user(session['email'])
+        cache.set('profile_data',user_specific_data,timeout=180*60)
+    else:
+        print("cache Hit")
+    
+
 @app.route('/find_friends')
 def find_friends():
     all_user_data=None
     all_user_data = cache.get('cached_all_user_data')
     
     if(all_user_data is None):
-        print("Cache hit")
+        
         all_user_data=user_dataAPI.get_all_user_data()
         
         cache.set('all_user_data', all_user_data, timeout=180 * 60)
+    else:
+        print("Cache hit")
+        
     print(all_user_data)
     
     if not all_user_data:
