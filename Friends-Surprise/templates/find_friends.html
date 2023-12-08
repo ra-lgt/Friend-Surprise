@@ -1,12 +1,158 @@
 <html>
 
 <head>
+  <link rel="stylesheet" href="{{url_for('static',filename='/css/templatemo-chain-app-dev.css')}}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{url_for('static',filename='css/find_friends.css')}}"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+  <script src="{{url_for('static',filename='/js/custom.js')}}"></script>
+  <script src="{{url_for('static',filename='/vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{url_for('static',filename='/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static',filename='/js/owl-carousel.js')}}"></script>
+  <script src="{{url_for('static',filename='/js/animation.js')}}"></script>
+  <script src="{{url_for('static',filename='/js/imagesloaded.js')}}"></script>
+  <script src="{{url_for('static',filename='/js/popup.js')}}"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <title>Chain App Dev - App Landing Page HTML5 Template</title>
+
+  <!-- Bootstrap core CSS -->
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="{{url_for('static',filename='/vendor/aos/aos.css')}}" rel="stylesheet">
+<link href="{{url_for('static',filename='/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+<link href="{{url_for('static',filename='/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+<link href="{{url_for('static',filename='/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+<link href="{{url_for('static',filename='/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+<link href="{{url_for('static',filename='/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+<link href="{{url_for('static',filename='/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="{{url_for('static',filename='/css/style.css')}}" rel="stylesheet">
+  <!-- Vendor JS Files -->
+<script src="{{url_for('static',filename='/vendor/purecounter/purecounter_vanilla.js')}}"></script>
+<script src="{{url_for('static',filename='/vendor/aos/aos.js')}}"></script>
+<script src="{{url_for('static',filename='/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{url_for('static',filename='/vendor/glightbox/js/glightbox.min.js')}}"></script>
+<script src="{{url_for('static',filename='/vendor/swiper/swiper-bundle.min.js')}}"></script>
+<script src="{{url_for('static',filename='/vendor/php-email-form/validate.js')}}"></script>
+
+<!-- Template Main JS File -->
+<script src="{{url_for('static',filename='/js/main.js')}}"></script>
+
+
+<!--
+
+TemplateMo 570 Chain App Dev
+
+https://templatemo.com/tm-570-chain-app-dev
+
+-->
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{url_for('static',filename='/css/templatemo-chain-app-dev.css')}}">
+  <link rel="stylesheet" href="{{url_for('static',filename='/css/animated.css')}}">
+  <link rel="stylesheet" href="{{url_for('static',filename='/css/owl.css')}}">
 </head>
 
+<header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <!-- ***** Logo Start ***** -->
+          <a href="index.html" class="logo">
+            <img src="{{url_for('static',filename='/images/logo.png')}}" alt="Chain App Dev">
+          </a>
+          <!-- ***** Logo End ***** -->
+          <!-- ***** Menu Start ***** -->
+          <ul class="nav">
+            {% if true %}
+            <li class="scroll-to-section"><a href="{{url_for('Home')}}" >Home</a></li>
+            <li class="scroll-to-section"><a href="{{url_for ('find_friends')}}"class="active">Find</a></li>
+            <li class="scroll-to-section"><a href="#about">Create Event</a></li>
+            <li class="scroll-to-section"><a href="#pricing">Message</a></li>
+            <li class="scroll-to-section"><a href="#newsletter">Profile</a></li>
+            <li><div class="gradient-button"><a id="modal_trigger" href="{{url_for('logout')}}"><i class="fa fa-sign-in-alt"></i>Logout</a></div></li> 
+            {% else %}
+            <li><div class="gradient-button"><a id="modal_trigger" href="{{url_for('signup_login')}}"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li> 
+            {% endif %}
+          </ul>        
+          <a class="menu-trigger">
+              <span>Menu</span>
+          </a>
+          <!-- ***** Menu End ***** -->
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% for i in range(count) %}
+<div class="modal fade" id="learnMore{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8">
+             <img src="http://numbots.com/wp-content/uploads/2018/12/Fairybot-with-shadow.png" alt="" width=80%/>
+          </div>
+          <div class="col-sm-4 align-self-center"> 
+            <h5 class="intro-title">Username : {{all_user_data['username'][i]}} </h5>
+            <br>
+            <h5 class="intro-title">First Name : {{all_user_data['first_name'][i]}} </h5>
+            <br>
+            <h5 class="intro-title">Last Name : {{all_user_data['last_name'][i]}} </h5>
+            <br>
+            <h5 class="intro-title">Age : {{all_user_data['Age'][i]}} </h5>
+            <br>
+
+            <h5 class="intro-title">Country : {{all_user_data['Country'][i]}} </h5>
+            <br>
+            <h5 class="intro-title">Email : {{all_user_data['email'][i]}} </h5>
+            <!-- <h3> TITLE </h3>
+            <p> some other content, some other, content </p> -->
+            
+          </div>          
+        </div>  
+      </div>
+      <button>Click</button>
+      
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endfor %}
+<style>
+  @media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 950px;
+    }
+  }
+
+</style>
 <div id="sandbox">
 
     <div class="sideb">
@@ -29,12 +175,11 @@
         <div class="filter">
           <h3>Filter by Country</h3>
           <select id="location-filter" class="location selectlist">
-        <option selected="selected" value="">All Locations</option>
-        <option value="Hyderabad">Hyderabad</option>
-        <option value="Bengaluru">Bengaluru</option>
-        <option value="Seattle">Seattle</option>
-        <option value="Dubai">Dubai</option>
-        <option value="London">London</option>
+            {% for i in range(count) %}
+            {% if all_user_data['Country'][i]!="Not Set" %}
+        <option selected="selected" value="">{{all_user_data['Country'][i]}}</option>
+        {% endif %}
+       {% endfor %}
       </select>
         </div>
         <!-- <div class="filter">
@@ -58,6 +203,11 @@
   </div>
   
   </html>
+  <style>
+    .image{
+      width: 20%;
+    }
+  </style>
 
   <script>
     // List.js set-up and initialisation
@@ -65,14 +215,35 @@
 var options = {
     valueNames: [
       "jobTitle",
-      "jobType",
       "datePosted",
       "jobLocation",
       { attr: "href", name: "applyLink" },
-      { attr: "src", name: "image" }
+      { attr: "src", name: "image" },
+      { attr: "data-target", name: "jobType" } 
     ],
     item:
-    '<li><img class="image"><a class="applyLink"><h3 class="jobTitle"></h3></a><div class="bottomBox"><div class="left-part"><button class="jobType"></button><p class="jobLocation"></p></div><div class="dateBox"><h5>Joined Date</h5><p class="datePosted"></p></div></div></li>',
+'<li>' +
+  '<img class="image">' +
+  '<a class="applyLink">' +
+    '<h3 class="jobTitle"></h3>' +
+  '</a>' +
+  '<div class="bottomBox">' +
+    '<div class="left-part">' +
+      '<button type="button" class="jobType" data-toggle="modal">View More' +
+        '</button>' +
+      '<p class="jobLocation"></p>' +
+    '</div>' +
+    '<div class="dateBox">' +
+      '<h5>Joined Date</h5>' +
+      '<p class="datePosted"></p>' +
+    '</div>' +
+    // New button added below
+    
+
+    
+  '</div>' +
+'</li>',
+
     page: 6,
     pagination: {
       innerWindow: 2,
@@ -87,11 +258,11 @@ var options = {
  
     {
       jobTitle: "{{all_user_data['username'][i]}}",
-      jobType: "View More",
-      datePosted: "2016-08-19",
-      jobLocation:"Hyderabad",
+      jobType:  "#learnMore{{i}}",
+      datePosted: "{{all_user_data['Joined_date'][i]}}",
+      jobLocation:"{{all_user_data['Country'][i]}}",
       applyLink: "#",
-      image: "{{url_for('static',filename='images/client-image.png')}}"
+      image: "{{url_for('static',filename='images/logo.png')}}",
     },
     {% endfor %}
 

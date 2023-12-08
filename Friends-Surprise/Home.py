@@ -3,7 +3,7 @@ import json
 from Configuration import Config
 from send_email import send_email
 import random
-from Data_CollectionAPI import DataAPI
+from UserDataCollectionAPI import DataAPI
 from flask_caching import Cache
 from datetime import datetime
 
@@ -171,9 +171,11 @@ def find_friends():
     all_user_data = cache.get('cached_all_user_data')
     
     if(all_user_data is None):
+        print("Cache hit")
         all_user_data=user_dataAPI.get_all_user_data()
         
         cache.set('all_user_data', all_user_data, timeout=180 * 60)
+    print(all_user_data)
     
     if not all_user_data:
         count=0

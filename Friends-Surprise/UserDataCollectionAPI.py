@@ -26,3 +26,4 @@ class DataAPI:
                 
         del user_all_data['_id']
         return user_all_data
+    
