@@ -124,16 +124,13 @@ ul {
 }
 
 p {
-  font-size: 15px;
+  font-size: 17px;
   line-height: 30px;
   font-weight: 300;
-  color: #afafaf;
+  color: white;
 }
 
-img {
-  width: 100%;
-  overflow: hidden;
-}
+
 
 /* 
 ---------------------------------------------
@@ -358,6 +355,7 @@ header
 .header-area .main-nav .logo {
     line-height: 100px;
     float: left;
+    margin-top: 20px;
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
@@ -366,6 +364,7 @@ header
 
 .background-header .main-nav .logo {
   line-height: 80px;
+ 
 }
 
 .background-header .main-nav .nav {

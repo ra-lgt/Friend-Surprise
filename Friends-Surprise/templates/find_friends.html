@@ -72,7 +72,7 @@ https://templatemo.com/tm-570-chain-app-dev
         <nav class="main-nav">
           <!-- ***** Logo Start ***** -->
           <a href="index.html" class="logo">
-            <img src="{{url_for('static',filename='/images/logo.png')}}" alt="Chain App Dev">
+            <img src="{{url_for('static',filename='/images/logo.png')}}" alt="Chain App Dev" >
           </a>
           <!-- ***** Logo End ***** -->
           <!-- ***** Menu Start ***** -->
@@ -114,34 +114,36 @@ https://templatemo.com/tm-570-chain-app-dev
         </button>
         </br>
       <div class="container">
-        <div class="row">
-          <div class="col-sm-8">
+        <p style="font-weight:bold ; padding-bottom: 20px; font-family:'Times New Roman', Times, serif; color:rgb(19,175,240); font-size: 30px ; text-align: center;">User Details</p>
+        <div style="    margin-left: 100px;" class="row">
+          <div style="width:340" class="col-sm-8">
             {% if all_user_data['profile_url'][i]!="" %}
-             <img src="{{all_user_data['profile_url'][i]}}" alt="" width=80%/>
+             <img height="300" src="{{all_user_data['profile_url'][i]}}" alt="">
              {% else %}
-             <img src="{{url_for('static',filename='images/default_profile.jpg')}}" alt="" width=80%/>
+             <img  src="{{url_for('static',filename='images/default_profile.jpg')}}" alt="" />
              {% endif %}
           </div>
-          <div class="col-sm-4 align-self-center"> 
-            <h5 class="intro-title">Username : {{all_user_data['username'][i]}} </h5>
+          <div style="width: 400;" class="col-sm-4 align-self-center"> 
+            <h5 class="intro-title">Username :  {{all_user_data['username'][i]}} </h5>
             <br>
-            <h5 class="intro-title">First Name : {{all_user_data['first_name'][i]}} </h5>
+            <h5 class="intro-title">First Name :  {{all_user_data['first_name'][i]}} </h5>
             <br>
-            <h5 class="intro-title">Last Name : {{all_user_data['last_name'][i]}} </h5>
+            <h5 class="intro-title">Last Name :  {{all_user_data['last_name'][i]}} </h5>
             <br>
-            <h5 class="intro-title">Age : {{all_user_data['Age'][i]}} </h5>
+            <h5 class="intro-title">Age :  {{all_user_data['Age'][i]}} </h5>
             <br>
 
-            <h5 class="intro-title">Country : {{all_user_data['Country'][i]}} </h5>
+            <h5 class="intro-title">Country :  {{all_user_data['Country'][i]}} </h5>
             <br>
-            <h5 class="intro-title">Email : {{all_user_data['email'][i]}} </h5>
+            <h5 class="intro-title">Email :  {{all_user_data['email'][i]}} </h5>
             <!-- <h3> TITLE </h3>
             <p> some other content, some other, content </p> -->
             
           </div>          
         </div>  
       </div>
-      <button>Click</button>
+      <button id='cbtn' style="background: rgb(19,175,240); margin-left: 460px;
+      background: linear-gradient(105deg, rgba(91,104,235,1) 0%, rgba(40,225,253,1) 100%);color:white; padding:5px 20px; font-size: 15; border: 1px solid  rgb(19,175,240);border-radius:30px;">Click</button>
       
       </div>
 
