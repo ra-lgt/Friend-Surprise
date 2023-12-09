@@ -112,14 +112,14 @@ def signup():
             'email':data['email'],
             'phone':data['phone'],
             'password':data['password'],
-            'Age':"Not Set",
+            'Age':"-1",
             'Address':"Not Set",
             'About':"Not Set",
             'first_name':"Not Set",
             'last_name':"Not Set",
             'City':"Not Set",
             'Country':"Not Set",
-            'Postal Code':"Not Set",
+            'Postal_Code':"-1",
             'Joined_date':current_date.strftime("%Y-%m-%d")
             })
     
@@ -166,7 +166,7 @@ def logout():
     session.pop('user_id', None)
     return redirect(url_for('Home'))
 
-@app.route('/profile')
+@app.route('/profile',methods=['GET','POST'])
 def profile():
     user_specific_data=None
     user_specific_data=cache.get('profile_data')
@@ -176,28 +176,81 @@ def profile():
         cache.set('profile_data',user_specific_data,timeout=180*60)
     else:
         print("cache Hit")
+
+    print(user_specific_data)
+
+    return render_template("profile.html",user_specific_data=user_specific_data)
+
+@app.route('/update_profile_data',methods=['POST'])
+def update_profile_data():
+  
     
+    updated_data={}
+    
+    
+    updated_data['first_name']=request.form['f_name']
+    updated_data['last_name']=request.form['l_name']
+    updated_data['phone']=request.form['phone']
+    updated_data['Age']=request.form['age']
+    updated_data['Address']=request.form['address']
+    updated_data['City']=request.form['city']
+    updated_data['Country']=request.form['country']
+    updated_data['Postal_Code']=request.form['postal']
+    updated_data['About']=request.form['about']
+    
+    return_code=user_dataAPI.update_profile(updated_data,session['email'])
+    
+    if(return_code==True):
+        
+        cache.clear()
+        return redirect(url_for('profile'))
+    
+    else:
+        return redirect(url_for('error',data="Couldn't Update",reason="Try to update again you should have strong internet"))
+    
+
+@app.route('/save_profile_pic',methods=['POST'])
+def save_profile_pic():
+    
+    if 'file' not in request.files:
+        print("file not found")
+    file = request.files['file']
+
+    return_code=user_dataAPI.save_profile(file,cache.get('profile_data')['username'])
+    
+    if(return_code==True):
+        result = {'message': 'Image uploaded successfully'}
+        return jsonify(result)
+    else:
+        result = {'error': 'Unexpected error occured'}
+        return jsonify(result)
+        
 
 @app.route('/find_friends')
 def find_friends():
     all_user_data=None
     all_user_data = cache.get('cached_all_user_data')
+    print("cache data",all_user_data)
     
     if(all_user_data is None):
         
         all_user_data=user_dataAPI.get_all_user_data()
         
-        cache.set('all_user_data', all_user_data, timeout=180 * 60)
+        cache.set('cached_all_user_data', all_user_data, timeout=180 * 60)
     else:
         print("Cache hit")
+    
+    country=[]
         
-    print(all_user_data)
+    for i in all_user_data['Country']:
+        if(i not in country and i!="Not Set"):
+            country.append(i)
     
     if not all_user_data:
         count=0
     else:
         count=len(all_user_data['username'])
-    return render_template('find_friends.html',all_user_data=all_user_data,count=count)
+    return render_template('find_friends.html',all_user_data=all_user_data,count=count,country=country)
 
 @app.route('/')
 def Home():

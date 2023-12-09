@@ -6,7 +6,7 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="https://www.creative-tim.com/product/argon-dashboard" target="_blank">Home</a>
+        <a href="{{url_for('Home')}}"class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="https://www.creative-tim.com/product/argon-dashboard" target="_blank">Home</a>
         <!-- Form -->
        
         <!-- User -->
@@ -15,10 +15,10 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="https://demos.creative-tim.com/argon-dashboard/assets-old/img/theme/team-4.jpg">
+                  <img alt="Image placeholder" src="{{user_specific_data['profile_pic']}}">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+                  <span class="mb-0 text-sm  font-weight-bold">{{user_specific_data['username']}}</span>
                 </div>
               </div>
             </a>
@@ -35,7 +35,7 @@
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Hello Jesse</h1>
+            <h1 class="display-2 text-white">Hello {{user_specific_data['username']}}</h1>
             <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
             <a href="#!" class="btn btn-info">Logout</a>
           </div>
@@ -50,9 +50,12 @@
             <div class="row justify-content-center">
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
-                  <a href="#">
-                    <img src="https://demos.creative-tim.com/argon-dashboard/assets-old/img/theme/team-4.jpg" class="rounded-circle">
-                  </a>
+                    <form id="imageForm" action="#" method="post" enctype="multipart/form-data">
+    <label for="imageUpload">
+      <img id="previewImage" src="{{user_specific_data['profile_pic']}}" class="rounded-circle" style="cursor: pointer;">
+    </label>
+    <input type="file" id="imageUpload" style="display: none;" accept="image/*" onchange="previewFile()">
+  </form>
                 </div>
               </div>
             </div>
@@ -78,20 +81,20 @@
               </div>
               <div class="text-center">
                 <h3>
-                  Jessica Jones<span class="font-weight-light">, 27</span>
+                  {{user_specific_data['username']}}<span class="font-weight-light">, {{user_specific_data['Age']}}</span>
                 </h3>
                 <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                  <i class="ni location_pin mr-2"></i>{{user_specific_data['City']}}, {{user_specific_dataCountry}}
                 </div>
                 <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                  <i class="ni business_briefcase-24 mr-2"></i>{{user_specific_data['email']}}
                 </div>
                 <div>
-                  <i class="ni education_hat mr-2"></i>University of Computer Science
+                  <i class="ni education_hat mr-2"></i>UserID:{{user_specific_data['_id']}}
                 </div>
                 <hr class="my-4">
-                <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
-                <a href="#">Show more</a>
+                <p>{{user_specific_data['About']}}</p>
+                <a href="#">Show Friends</a>
               </div>
             </div>
           </div>
@@ -109,20 +112,20 @@
               </div>
             </div>
             <div class="card-body">
-              <form>
+              <form method="POST" action="{{url_for('update_profile_data')}}">
                 <h6 class="heading-small text-muted mb-4">User information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-username">Username</label>
-                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="lucky.jesse">
+                        <input type="text" id="input-username" name="username" disabled class="form-control form-control-alternative" placeholder="Username" value="{{user_specific_data['username']}}">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com">
+                        <input type="email" name="email" id="input-email" class="form-control form-control-alternative",placeholder="Enter Your email" value="{{user_specific_data['email']}}" disabled>
                       </div>
                     </div>
                   </div>
@@ -130,13 +133,13 @@
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="Lucky">
+                        <input type="text" name="f_name" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="{{user_specific_data['first_name']}}">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="Jesse">
+                        <input type="text" name="l_name" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="{{user_specific_data['last_name']}}">
                       </div>
                     </div>
                   </div>
@@ -144,13 +147,13 @@
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-username">Phone Number</label>
-                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="lucky.jesse">
+                        <input type="text" name="phone" id="input-username" class="form-control form-control-alternative" placeholder="Phone Number" value="{{user_specific_data['phone']}}">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Age</label>
-                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com">
+                        <input type="text" name="age" id="input-email" class="form-control form-control-alternative" placeholder="Enter Your Age" value="{{user_specific_data['Age']}}">
                       </div>
                     </div>
                   </div>
@@ -163,7 +166,7 @@
                     <div class="col-md-12">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-address">Address</label>
-                        <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+                        <input id="input-address" name="address" class="form-control form-control-alternative" placeholder="Home Address" value="{{user_specific_data['Address']}}" type="text">
                       </div>
                     </div>
                   </div>
@@ -171,19 +174,19 @@
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-city">City</label>
-                        <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York">
+                        <input type="text" name="city" id="input-city" class="form-control form-control-alternative" placeholder="City" value="{{user_specific_data['City']}}">
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-country">Country</label>
-                        <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="United States">
+                        <input type="text" name="country" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="{{user_specific_data['Country']}}">
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label" for="input-country">Postal code</label>
-                        <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
+                        <input type="number" name="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code" value="{{user_specific_data['Postal_Code']}}">
                       </div>
                     </div>
                   </div>
@@ -194,9 +197,10 @@
                 <div class="pl-lg-4">
                   <div class="form-group focused">
                     <label>About Me</label>
-                    <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                    <textarea rows="4" class="form-control form-control-alternative" name="about" placeholder="A few words about you ...">{{user_specific_data['About']}}.</textarea>
                   </div>
                 </div>
+                <button><a class="btn btn-info">Save</a></button>
               </form>
             </div>
           </div>
@@ -206,6 +210,55 @@
   </div>
 
 </body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript">
+   
+    function previewFile() {
+      var preview = document.getElementById('previewImage');
+      var fileInput = document.getElementById('imageUpload');
+      var file = fileInput.files[0];
+      var reader = new FileReader();
+
+      reader.onloadend = function () {
+        preview.src = reader.result;
+      }
+
+      if (file) {
+        reader.readAsDataURL(file);
+        uploadImage()
+      }
+    }
+
+    function uploadImage() {
+      console.log("hi")
+      var formData = new FormData();
+      var fileInput = document.getElementById('imageUpload');
+      var file = fileInput.files[0];
+
+      if (file) {
+        formData.append('file', file);
+
+        $.ajax({
+          type: 'POST',
+          url: '/save_profile_pic',  // Replace with your Flask route for image upload
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function(response) {
+            // Handle the response from the Flask server
+            alert(response)          },
+          error: function(error) {
+            // Handle any errors that occurred during the request
+            console.error('Error:', error);
+          }
+        });
+      } else {
+        console.error('No file selected for upload.');
+      }
+    }
+  
+  
+</script>
 <style>
 
 :root {

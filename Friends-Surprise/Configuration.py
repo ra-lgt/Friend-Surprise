@@ -25,4 +25,7 @@ class Config:
 	def create_mong_conn(self):
 		return self.client
 
+	def Setup_Storage(self):
+		return self.firebase.storage()
+
 

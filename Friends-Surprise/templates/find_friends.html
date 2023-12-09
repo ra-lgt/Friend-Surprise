@@ -116,7 +116,11 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="container">
         <div class="row">
           <div class="col-sm-8">
-             <img src="http://numbots.com/wp-content/uploads/2018/12/Fairybot-with-shadow.png" alt="" width=80%/>
+            {% if all_user_data['profile_url'][i]!="" %}
+             <img src="{{all_user_data['profile_url'][i]}}" alt="" width=80%/>
+             {% else %}
+             <img src="{{url_for('static',filename='images/default_profile.jpg')}}" alt="" width=80%/>
+             {% endif %}
           </div>
           <div class="col-sm-4 align-self-center"> 
             <h5 class="intro-title">Username : {{all_user_data['username'][i]}} </h5>
@@ -175,10 +179,10 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="filter">
           <h3>Filter by Country</h3>
           <select id="location-filter" class="location selectlist">
-            {% for i in range(count) %}
-            {% if all_user_data['Country'][i]!="Not Set" %}
-        <option selected="selected" value="">{{all_user_data['Country'][i]}}</option>
-        {% endif %}
+            {% for i in country %}
+            
+        <option selected="selected" value="">{{i}}</option>
+        
        {% endfor %}
       </select>
         </div>
@@ -262,7 +266,14 @@ var options = {
       datePosted: "{{all_user_data['Joined_date'][i]}}",
       jobLocation:"{{all_user_data['Country'][i]}}",
       applyLink: "#",
-      image: "{{url_for('static',filename='images/logo.png')}}",
+      {% if all_user_data['profile_url'][i]=="" %}
+
+      image: "{{url_for('static',filename='images/default_profile.jpg')}}",
+
+      {% else %}
+      image:"{{all_user_data['profile_url'][i]}}"
+
+      {% endif %}
     },
     {% endfor %}
 

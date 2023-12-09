@@ -84,10 +84,39 @@ https://templatemo.com/tm-570-chain-app-dev
             </a>
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
+            <style>
+              ul.nav li.scroll-to-section a {
+                display: flex;
+                align-items: center;
+              }
+              
+              ul.nav li.scroll-to-section a img {
+                margin-right: 5px; /* Adjust the margin as needed to separate the image and text */
+              }
+              
+              ul.nav li.scroll-to-section a span {
+                display: inline-block;
+              }
+              
+            </style>
             <ul class="nav">
               {% if session_bool %}
-              <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-              <li class="scroll-to-section"><a href="{{url_for ('find_friends')}}">Find</a></li>
+              <li class="scroll-to-section">
+                <a href="{{url_for('Home')}}" class="active">
+                <div style="display: flex; align-items: center;">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAABP0lEQVR4nO2UMUvDUBDHI4qDk0MFHYvgIKXmXlpXBwdxV3CyUz+AH8HFXVTkjohDtyzddNDi53Hp3Wu6R67EiGmCiSRTe/Anj3vc/8e9dy+OUyL2g2jdkJzo16kj3KfJFhA/AMrIoKCH051qAShdIBkqIBHJUPO63/HDFqBcqHRd0j5a0UJD8vYLEMuQvBvivnZpiO805+G4V9jew2gDiK+zzCEt4puDZ96cAcleFgTIrkEZFAJg3BXKQOsU9icA/PDYEL+UAUAC4lcX7Wmu+XkQrWq7/zGHOdmro49oLXU8k8b3xVUlg/zYvf/cngHaZPeAbFAlAJKBsIH6O4fEzXjOK4d0/LDVJm7+XHgNEGduqhYDQnKr452W5iuD5P2PPBz3lpDR8rhgcabLJT7LenAqD9lkQ9jk1ahfVk1t8QUuJb3FLeWlPwAAAABJRU5ErkJggg==">
+                <span>Home</span>
+              </div>
+              </a>
+            </li>
+              <li class="scroll-to-section">
+                <a href="{{url_for ('find_friends')}}">
+                  <div style="display: flex; align-items: center;">
+                  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB80lEQVR4nM2VS08UQRDHZyHRKBJDCCTcNSbLa7p7SQxfARNPPs6iV1AeR4Lx7sEAg1W7ZFmFmGA4wZUvwtFIiBG2une9N6me2XUhG2ZaWLWSTicz1fXrrq76dxD8c1u2XQrqoxLNIwH6Oc+FUn2Ev1859r0PhzfjoHpXgD64OCToXfFRP8vv2Bt/BBiL6oOyqOF30GpZgHkjkV7xLECXW2AQbtQGvAAKqncF0FYSpDyOFLbzK5RICNSbCejzZMn2ZoegeRcDzOrYp+Oey3zzqz/uCKS1xP9tJsA4ng7HC2hvYuV7f5Y1ExXTL0Dv8bpw/SSfukCCmU0gLwIPC7E27SBQnUl1blxouG7u+0AK0c8HjQJJh6DeZ+eH77/d8oEoOLrtIKj3OwixHpC/kS5VNDMxhKZ9IAropesXpNepzlyCzRKumEwlHG7UBholzCfKtCtuqji/tMbNltqMQBH7q6JeCrIaywPLRHKRmwpItvNTQFIAVZoahrQYWJvLDOIUsPA1BZI1CmnOCSTSXGvw1hECzXuBWMIl6qdO0ttL/df4KaDFK4GcLduuQnQ6osBMcVCFtcf8aD3Zsd3uv7U5CWbh/AZowR+UajbH5XsO5HtH/xfIXkgdmu3RSPddLyRwJHciifRFwa+hDgAaHJvr0AkutzP7B6N0tnYAcgAAAABJRU5ErkJggg==">
+                  <span>Search</span>
+                </div>
+                </a>
+              </li>
               <li class="scroll-to-section"><a href="#about">Create Event</a></li>
               <li class="scroll-to-section"><a href="#pricing">Message</a></li>
               <li class="scroll-to-section"><a href="{{url_for('profile')}}">Profile</a></li>
@@ -337,6 +366,8 @@ https://templatemo.com/tm-570-chain-app-dev
       </div>
     </div>
   </div> -->
+  
+ 
 
   <section id="details" class="details">
       <div class="container">
