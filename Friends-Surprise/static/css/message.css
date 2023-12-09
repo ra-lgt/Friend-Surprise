@@ -1,0 +1,77 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #637381;
+  text-align: left;
+  background-color: #f4f6f8;
+}
+img{
+  margin-left: 1000px;
+}
+.buttons{
+  display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+ .buttons button {
+    margin-left: 50px; 
+  }
+.container {
+  width: 100%;
+  max-width: 1140px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 2px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 30px;
+  background-color:#fff;
+  border: 1px solid #ced4da;
+  border-radius: 50px;
+}
+
+.card .card-title {
+  color: #212529;
+  font-weight: 799;
+  font-size: 1.5rem;
+  line-height: 1.33333;
+  margin-bottom: 1rem;
+}
+
+.card .card-body {
+  padding: 2rem;
+  align-self: center;
+}
+
+.card2 {
+  transition: all 100ms ease-in-out;
+  border: none;
+  box-shadow: 0 9px 9px rgba(0, 0, 0, 0.18);
+}
+
+.card2:hover {
+  transform: scale(1.04);
+  border: none;
+}
+
+.card2 > a:hover,
+.card2 > a:active {
+  color: inherit;
+  background: black;
+  text-decoration: none;
+}
