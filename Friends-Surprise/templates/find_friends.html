@@ -103,6 +103,7 @@ https://templatemo.com/tm-570-chain-app-dev
 <br>
 <br>
 
+
 {% for i in range(count) %}
 <div class="modal fade" id="learnMore{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -142,15 +143,49 @@ https://templatemo.com/tm-570-chain-app-dev
           </div>          
         </div>  
       </div>
-      <button id='cbtn' style="background: rgb(19,175,240); margin-left: 460px;
-      background: linear-gradient(105deg, rgba(91,104,235,1) 0%, rgba(40,225,253,1) 100%);color:white; padding:5px 20px; font-size: 15; border: 1px solid  rgb(19,175,240);border-radius:30px;">Click</button>
+      <button id='cbtn' class="{{i}}" onclick="send_request('{{ all_user_data['username'][i] }}', '{{ all_user_data['email'][i] }}')" style="background: rgb(19,175,240); margin-left: 460px;
+      background: linear-gradient(105deg, rgba(91,104,235,1) 0%, rgba(40,225,253,1) 100%);color:white; padding:5px 20px; font-size: 15; border: 1px solid  rgb(19,175,240);border-radius:30px;">Send Friend Request</button>
       
       </div>
+      
 
     </div>
   </div>
 </div>
 {% endfor %}
+<script>
+  function send_request(username,email){
+    var requestData = {
+      username: username,
+      email: email
+  };
+
+  fetch('/send_friend_request', {
+    method: 'POST', // or 'GET' depending on your backend
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestData),
+})
+.then(response => response.json())
+.then(data => {
+    // Handle the response data
+    if(data['status']==200){
+      var url="{{url_for('sucess',data='Request Sent')}}"
+      window.location.href = url;
+    }
+    else{
+      var url="{{url_for('error',data='Could not send request',reason='Try to send the request again')}}"
+      window.location.href = url;
+    }
+})
+.catch(error => {
+    // Handle errors
+    console.error('Error sending request:', error);
+});
+    
+  }
+</script>
 <style>
   @media (min-width: 576px) {
     .modal-dialog {

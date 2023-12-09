@@ -6,6 +6,7 @@ import random
 from UserDataCollectionAPI import DataAPI
 from flask_caching import Cache
 from datetime import datetime
+from FriendAPI import FriendAPI
 
 app = Flask(__name__)
 config=Config()
@@ -15,6 +16,7 @@ app.secret_key = 'Friend-surprise'
 mongo_client=config.create_mong_conn()
 user_dataAPI=DataAPI()
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+friend=FriendAPI()
 
 
 @app.route('/terms')
@@ -37,6 +39,11 @@ def check_email_exists(email):
 #==========================================================Helping Funstions
 
 #success Register
+@app.route('/sucess')
+def sucess():
+    return render_template('success.html',data=request.args.get('data'))
+    
+
 @app.route('/sucess_register')
 def sucess_register():
     return render_template('success.html',data="THANKS FOR REGISTERING")
@@ -212,6 +219,28 @@ def update_profile_data():
 def notification():
     return render_template('message.html')
 
+@app.route('/send_friend_request',methods=['POST','GET'])
+def send_friend_request():
+    
+    friend_request=request.get_json()
+    user_specific_data=None
+    user_specific_data=cache.get('profile_data')
+    
+    if(user_specific_data is None):
+        user_specific_data=user_dataAPI.get_data_of_specific_user(session['email'])
+        cache.set('profile_data',user_specific_data,timeout=180*60)
+    else:
+        print("cache Hit")
+    
+    return_code=friend.send_friend_notification(friend_request,user_specific_data)
+    
+    if(return_code==True):
+        message={'message':'successfully sent','status':200}
+        return jsonify(message),200
+    
+    return jsonify({'message':'error in request','status':404}),404
+    
+
 
 @app.route('/save_profile_pic',methods=['POST'])
 def save_profile_pic():
@@ -238,7 +267,7 @@ def find_friends():
     
     if(all_user_data is None):
         
-        all_user_data=user_dataAPI.get_all_user_data()
+        all_user_data=user_dataAPI.get_all_user_data(session['email'])
         
         cache.set('cached_all_user_data', all_user_data, timeout=180 * 60)
     else:

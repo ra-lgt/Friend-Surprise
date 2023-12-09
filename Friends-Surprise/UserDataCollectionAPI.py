@@ -8,12 +8,12 @@ class DataAPI:
         self.mongo_conn=self.config.create_mong_conn()
         self.storage=self.config.Setup_Storage()
         
-    def get_all_user_data(self):
+    def get_all_user_data(self,email):
         
         db = self.mongo_conn["User-Data"]
         collection=db['user_details']
         
-        cursor = collection.find({})
+        cursor = collection.find({"email": {"$ne": email}})
         
         user_all_data={}
         
