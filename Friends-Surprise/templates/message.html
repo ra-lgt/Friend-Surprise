@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="{{url_for('static',filename='css/message.css')}}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <title>Ville de Montréal - Toolbox</title>
  
@@ -15,7 +15,7 @@
     <div class="row cards ">
         <div class="card card2 card-fw card-row-layout">
             <div class="card-body">
-              <img src="E:\Friendship\green-dot-icon.png" height="10" width="10">
+              <img src="{{url_for('static',filename='images/green-dot-icon.png')}}" height="10" width="10">
               <br>
               <span class="card-title">Full width card with image on right side</span>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -27,7 +27,7 @@
         </div>
         <div class="card card2 card-fw card-row-layout">
         <div class="card-body">
-              <img src="E:\Friendship\green-dot-icon.png" height="10" width="10">
+              <img src="{{url_for('static',filename='images/green-dot-icon.png')}}" height="10" width="10">
               <br>
               <span class="card-title">Full width card with image on right side</span>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>          

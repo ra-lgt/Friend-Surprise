@@ -208,6 +208,10 @@ def update_profile_data():
     else:
         return redirect(url_for('error',data="Couldn't Update",reason="Try to update again you should have strong internet"))
     
+@app.route('/notification')
+def notification():
+    return render_template('message.html')
+
 
 @app.route('/save_profile_pic',methods=['POST'])
 def save_profile_pic():
