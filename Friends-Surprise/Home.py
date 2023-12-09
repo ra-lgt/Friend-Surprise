@@ -171,6 +171,8 @@ def login():
 def logout():
     # Clear the user ID from the session
     session.pop('user_id', None)
+    session.clear()
+    cache.clear()
     return redirect(url_for('Home'))
 
 @app.route('/profile',methods=['GET','POST'])
@@ -214,11 +216,35 @@ def update_profile_data():
     
     else:
         return redirect(url_for('error',data="Couldn't Update",reason="Try to update again you should have strong internet"))
-    
+
+@app.route('/create_event')
+def create_event():
+    return render_template('create.html')
+
 @app.route('/notification')
 def notification():
-    return render_template('message.html')
+    user_notifications=None
+    user_notifications=cache.get("notifications")
+    if(user_notifications is None):
+        user_notifications=friend.get_friend_notification(session['email'])
+        cache.set("notifications",user_notifications,timeout=180*60)
+    
+    
+    return render_template('message.html',notifications=user_notifications,count=len(user_notifications['_id']))
 
+@app.route('/accepted_request',methods=['POST','GET'])
+def accepted_request():
+    sender_datal=request.get_json()
+    
+    return_code=friend.add_friend(sender_datal['sender_email'],session['email'],id=sender_datal['id'])
+    
+    if(return_code==True):
+        cache.clear()
+        return jsonify({'status':200}),200
+    else:
+        return jsonify({"status":404}),404
+        
+    
 @app.route('/send_friend_request',methods=['POST','GET'])
 def send_friend_request():
     

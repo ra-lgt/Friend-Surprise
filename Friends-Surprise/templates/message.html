@@ -10,36 +10,102 @@
 
 <body class="" style="margin-top: 60px;">
   <div class="container">
-   
+    <style>
+      body {
+        margin: 0;
+    }
+      .container {
+          display: flex;
+          justify-content: flex-start; /* Align items to the right */
+      }
+
+     
+  </style>
     
     <div class="row cards ">
+      {% for i in range(count) %}
+      {% if notifications['notification_type'][i]=="friend_request" %}
+
         <div class="card card2 card-fw card-row-layout">
             <div class="card-body">
-              <img src="{{url_for('static',filename='images/green-dot-icon.png')}}" height="10" width="10">
+              
               <br>
-              <span class="card-title">Full width card with image on right side</span>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              {% if notifications['sender_profile_pic'][i]=='' %}
+              <img src="{{url_for('static',filename='images/client-image.jpg')}}" width="10%" height="10%">
+              {% else %}
+              <img src="{{notifications['sender_profile_pic'][i]}}" height="10" width="10">
+              {% endif %}
+              <span class="card-title">UserName : {{notifications['sender_username'][i]}}</span>
+              <br>
+              <span class="card-title">Email : {{notifications['sender_email'][i]}}</span>
+              <p class="card-text">{{notifications['sender_username'][i]}} who may know you, has sent a request to connect with you.</p>
+
+                <p>Looking forward to your connection!</p>
               <div class="buttons">
-      <button type="button" class="btn btn-success">✓ Accept</button>
+      <button type="button" class="btn btn-success" onclick="accepted_request('{{notifications['sender_email'][i]}}', '{{notifications['_id'][i]}}')">✓ Accept</button>
       <button type="button" class="btn btn-danger ml-3">X Deny</button>
              </div>            
             </div>
         </div>
+      {% else %}
+
         <div class="card card2 card-fw card-row-layout">
         <div class="card-body">
               <img src="{{url_for('static',filename='images/green-dot-icon.png')}}" height="10" width="10">
               <br>
               <span class="card-title">Full width card with image on right side</span>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>          
+              <div class="buttons">
+                <button type="button" class="btn btn-success">✓ Mark as read</button>
+                <button type="button" class="btn btn-danger ml-3">X Deny</button>
+                       </div>     
             </div>
           </div>
-           <div class="card card2 card-fw card-row-layout">
+          {% endif %}
+          {% endfor %}
+          <script>
+            function accepted_request(sender_email,id){
+              var data={
+                id:id,
+                sender_email:sender_email
+              }
+              console.log(data)
+
+              fetch('/accepted_request', {
+                method: 'POST', // or 'GET' depending on your backend
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response data
+                if(data['status']==200){
+                  var url="{{url_for('sucess',data='Accepted :)')}}"
+                  window.location.href = url;
+                }
+                else{
+                  var url="{{url_for('error',data='Could not send request',reason='Try to send the request again')}}"
+                  window.location.href = url;
+                }
+            })
+            .catch(error => {
+                // Handle errors
+                console.error('Error sending request:', error);
+            });
+
+            }
+
+          </script>
+
+           <!-- <div class="card card2 card-fw card-row-layout">
         <div class="card-body">
           <br>
               <span class="card-title">Full width card with image on right side</span>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>          
             </div>
-          </div>
+          </div> -->
       </div>
      
     </div>
