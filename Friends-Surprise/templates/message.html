@@ -23,6 +23,10 @@
   </style>
     
     <div class="row cards ">
+
+      {% if count==0 %}
+      <h1>No notifications till now</h1>
+      {% endif %}
       {% for i in range(count) %}
       {% if notifications['notification_type'][i]=="friend_request" %}
 
@@ -47,7 +51,7 @@
       {% else %}
       <button type="button" class="btn btn-success" onclick="accepted_request('{{notifications['sender_email'][i]}}', '{{notifications['_id'][i]}}','{{notifications['sender_username'][i]}}', 'None' ) ">✓ Accept</button>
       {% endif %}
-      <button type="button" class="btn btn-danger ml-3">X Deny</button>
+      <button type="button" class="btn btn-danger ml-3"  onclick="denied_request('{{notifications['sender_email'][i]}}', '{{notifications['_id'][i]}}','{{notifications['sender_username'][i]}}', 'None' ) ">X Deny</button>
              </div>            
             </div>
         </div>
@@ -68,6 +72,42 @@
           {% endif %}
           {% endfor %}
           <script>
+            function denied_request(sender_email,id,sender_username,sender_profile_pic){
+              var data={
+                id:id,
+                sender_email:sender_email,
+                sender_username:sender_username,
+                sender_profile_pic:sender_profile_pic
+              }
+              console.log(data)
+
+              fetch('/deny_message', {
+                method: 'POST', // or 'GET' depending on your backend
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response data
+                if(data['status']==200){
+                  var url="{{url_for('sucess',data='Denied Success :(')}}"
+                  window.location.href = url;
+                }
+                else{
+                  var url="{{url_for('error',data='Could not send request',reason='Try to send the request again')}}"
+                  window.location.href = url;
+                }
+            })
+            .catch(error => {
+                // Handle errors
+                console.error('Error sending request:', error);
+            });
+
+
+            }
+            
             function accepted_request(sender_email,id,sender_username,sender_profile_pic){
               var data={
                 id:id,

@@ -42,7 +42,10 @@
           <p>pick all the friends who need to particiapte in this event</p>
           <ul class="ks-cboxtags">
             {% for i in range(count) %}
-            <li><input type="checkbox" id="checkboxOne" name="friendCheckbox" value="{{friend_data['friend_username'][i]}}"><label for="checkboxOne">{{friend_data['friend_username'][i]}}</label></li>
+            <li>
+              <input type="checkbox" id="checkboxOne{{i}}" name="friendCheckbox" value="{{friend_data['friend_email'][i]}}">
+              <label for="checkboxOne{{i}}">{{friend_data['friend_username'][i]}}</label>
+            </li>
             {% endfor %}
            </ul>
           
@@ -74,9 +77,10 @@ function submit_event(){
 }
 var today = new Date();
 var userDate = new Date(e_date);
-if (userDate < today) {
+if (userDate <= today) {
   alert('The provided date is earlier than today.');
 }
+else{
 var data={
   Event_Name:e_name,
   Event_Desc:e_desc,
@@ -107,6 +111,7 @@ fetch('/create_event_data', {
   console.error('Error sending request:', error);
 });
 
+}
 }
 </script>
 

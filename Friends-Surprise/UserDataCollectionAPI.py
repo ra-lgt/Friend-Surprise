@@ -2,6 +2,7 @@ import pymongo
 from Configuration import Config
 import requests
 
+
 class DataAPI:
     def __init__(self):
         self.config=Config()
@@ -9,11 +10,28 @@ class DataAPI:
         self.storage=self.config.Setup_Storage()
         
     def get_all_user_data(self,email):
+        from FriendAPI import FriendAPI
+        friend=FriendAPI()
+        friend_email=[]
+        try:
+            friend_email=friend.get_friends_specific_user(email)['friend_email']
+        except:
+            pass
+        
         
         db = self.mongo_conn["User-Data"]
         collection=db['user_details']
         
-        cursor = collection.find({"email": {"$ne": email}})
+        
+        query = {
+    "$and": [
+        {"email": {"$ne": email}},
+        {"email": {"$nin": friend_email}}
+        
+    ]
+}
+        
+        cursor = collection.find(query)
         
         user_all_data={}
         
@@ -32,8 +50,10 @@ class DataAPI:
                     user_all_data['profile_url'].append(self.get_profile_pic(value))
                     
                     
-                
-        del user_all_data['_id']
+        try:        
+            del user_all_data['_id']
+        except:
+            pass
         
         return user_all_data
     def is_url_exists(self,url):

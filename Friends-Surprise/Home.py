@@ -8,6 +8,8 @@ from flask_caching import Cache
 from datetime import datetime
 from FriendAPI import FriendAPI
 from Event import Event
+import threading
+import schedule
 
 app = Flask(__name__)
 config=Config()
@@ -16,7 +18,7 @@ mail=send_email()
 app.secret_key = 'Friend-surprise'
 mongo_client=config.create_mong_conn()
 user_dataAPI=DataAPI()
-cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})  
 friend=FriendAPI()
 event=Event()
 
@@ -293,8 +295,18 @@ def accepted_request():
         return jsonify({'status':200}),200
     else:
         return jsonify({"status":404}),404
-        
+
+@app.route('/deny_message',methods=['POST','GET'])
+def deny_message():
+    sender_data=request.get_json()
+    return_code=friend.remove_notification(session['email'],sender_data['id'])
     
+    if(return_code==True):
+        cache.clear()
+        return jsonify({'status':200}),200
+    else:
+        return jsonify({"status":404}),404
+
 @app.route('/send_friend_request',methods=['POST','GET'])
 def send_friend_request():
     
@@ -371,5 +383,19 @@ def Home():
     
     return render_template('index.html',session_bool=session_bool)
 
+def check_current_event():
+    print("hell")
+    
+
+def schedule_for_event():
+    schedule.every().day.at("00:00").do(check_current_event)
+    while True:
+        schedule.run_pending()
+        
+
 if __name__ == '__main__':
+    background_thread = threading.Thread(target=schedule_for_event)
+    background_thread.daemon = True
+    background_thread.start()
+    
     app.run(debug=True)

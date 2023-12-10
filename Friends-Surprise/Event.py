@@ -1,6 +1,7 @@
 import pymongo
 from Configuration import Config
 import requests
+from datetime import datetime
 
 
 class Event:
@@ -12,8 +13,13 @@ class Event:
         db=self.mongo_conn['Event-Date']
         collection=db[host_email]
         
+        collection_curr=db['Current-Event']
+        collection_curr.create_index([("Event_Date", pymongo.ASCENDING)])
+        event_data['Event_Date']=datetime.strptime(event_data['Event_Date'], "%Y-%m-%d")
+        
         try:
             collection.insert_one(event_data)
+            collection_curr.insert_one(event_data)
             return True
         except:
             return False
