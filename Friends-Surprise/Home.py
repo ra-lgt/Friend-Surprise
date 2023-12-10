@@ -7,6 +7,7 @@ from UserDataCollectionAPI import DataAPI
 from flask_caching import Cache
 from datetime import datetime
 from FriendAPI import FriendAPI
+from Event import Event
 
 app = Flask(__name__)
 config=Config()
@@ -17,6 +18,7 @@ mongo_client=config.create_mong_conn()
 user_dataAPI=DataAPI()
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 friend=FriendAPI()
+event=Event()
 
 
 @app.route('/terms')
@@ -158,6 +160,7 @@ def login():
     try:
         userauth=firebase_db.sign_in_with_email_and_password(email,password)
         session['email']=email
+        session['username']=user_dataAPI.get_data_of_specific_user(email)['username']
     except:
         error_url = url_for('error', data="Invalid login", reason="Check your credentials and try again or contact us")
         return redirect(error_url)
@@ -175,10 +178,39 @@ def logout():
     cache.clear()
     return redirect(url_for('Home'))
 
+@app.route('/view_user_friends',methods=['POST','GET'])
+def view_user_friends():
+    friend_data=None
+    friend_data=cache.get('user_friend_data')
+    
+    if(friend_data is None):
+        
+        friend_data=friend.get_friends_specific_user(session['email'])
+        cache.set("user_friend_data",friend_data,timeout=180*60)
+        
+    return render_template('user_friends.html',friend_data=friend_data,count=len(friend_data['_id']))
+
+
 @app.route('/profile',methods=['GET','POST'])
 def profile():
     user_specific_data=None
     user_specific_data=cache.get('profile_data')
+    
+    user_specific_event=None
+    user_specific_event=cache.get('event_data')
+    
+    friend_data=None
+    friend_data=cache.get('user_friend_data')
+    
+    if(friend_data is None):
+        
+        friend_data=friend.get_friends_specific_user(session['email'])
+        cache.set("user_friend_data",friend_data,timeout=180*60)
+    
+    
+    if(user_specific_event is None):
+        user_specific_event=event.get_event_for_user(session['email'])
+        cache.set('event_data',user_specific_event,timeout=180*60)
     
     if(user_specific_data is None):
         user_specific_data=user_dataAPI.get_data_of_specific_user(session['email'])
@@ -186,9 +218,9 @@ def profile():
     else:
         print("cache Hit")
 
-    print(user_specific_data)
+    
 
-    return render_template("profile.html",user_specific_data=user_specific_data)
+    return render_template("profile.html",user_specific_data=user_specific_data,event_count=len(user_specific_event['_id']),friend_count=len(friend_data['_id']))
 
 @app.route('/update_profile_data',methods=['POST'])
 def update_profile_data():
@@ -217,9 +249,26 @@ def update_profile_data():
     else:
         return redirect(url_for('error',data="Couldn't Update",reason="Try to update again you should have strong internet"))
 
+@app.route('/create_event_data',methods=['POST','GET'])
+def create_event_data():
+    event_data=request.get_json()
+    return_code=event.create_event(event_data,session['email'])
+    
+    if(return_code==True):
+        return jsonify({"status":200}),200
+    else:
+        return jsonify({"status":404}),404
+    
 @app.route('/create_event')
 def create_event():
-    return render_template('create.html')
+    friend_data=None
+    friend_data=cache.get('user_friend_data')
+    if(friend_data is None):
+        
+        friend_data=friend.get_friends_specific_user(session['email'])
+        cache.set("user_friend_data",friend_data,timeout=180*60)
+        
+    return render_template('create.html',friend_data=friend_data,count=len(friend_data['_id']))
 
 @app.route('/notification')
 def notification():
@@ -234,9 +283,10 @@ def notification():
 
 @app.route('/accepted_request',methods=['POST','GET'])
 def accepted_request():
-    sender_datal=request.get_json()
+    sender_data=request.get_json()
     
-    return_code=friend.add_friend(sender_datal['sender_email'],session['email'],id=sender_datal['id'])
+    
+    return_code=friend.add_friend(sender_data,session['email'],session['username'])
     
     if(return_code==True):
         cache.clear()

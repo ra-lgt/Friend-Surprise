@@ -119,7 +119,7 @@ https://templatemo.com/tm-570-chain-app-dev
         <div style="    margin-left: 100px;" class="row">
           <div style="width:340" class="col-sm-8">
             {% if all_user_data['profile_url'][i]!="" %}
-             <img height="300" src="{{all_user_data['profile_url'][i]}}" alt="">
+             <img height="300" width="300" src="{{all_user_data['profile_url'][i]}}" alt="">
              {% else %}
              <img  src="{{url_for('static',filename='images/default_profile.jpg')}}" alt="" />
              {% endif %}

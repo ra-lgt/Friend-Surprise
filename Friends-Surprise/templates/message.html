@@ -31,7 +31,7 @@
               
               <br>
               {% if notifications['sender_profile_pic'][i]=='' %}
-              <img src="{{url_for('static',filename='images/client-image.jpg')}}" width="10%" height="10%">
+              <img src="{{url_for('static',filename='images/default_profile.jpg')}}" width="10%" height="10%">
               {% else %}
               <img src="{{notifications['sender_profile_pic'][i]}}" height="10" width="10">
               {% endif %}
@@ -42,7 +42,11 @@
 
                 <p>Looking forward to your connection!</p>
               <div class="buttons">
-      <button type="button" class="btn btn-success" onclick="accepted_request('{{notifications['sender_email'][i]}}', '{{notifications['_id'][i]}}')">✓ Accept</button>
+                {% if notifications['sender_profile_pic'][i]=='' %}
+      <button type="button" class="btn btn-success" onclick="accepted_request('{{notifications['sender_email'][i]}}', '{{notifications['_id'][i]}}','{{notifications['sender_username'][i]}}', '{{notifications['sender_profile_pic'][i]}}' ) ">✓ Accept</button>
+      {% else %}
+      <button type="button" class="btn btn-success" onclick="accepted_request('{{notifications['sender_email'][i]}}', '{{notifications['_id'][i]}}','{{notifications['sender_username'][i]}}', 'None' ) ">✓ Accept</button>
+      {% endif %}
       <button type="button" class="btn btn-danger ml-3">X Deny</button>
              </div>            
             </div>
@@ -57,17 +61,19 @@
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>          
               <div class="buttons">
                 <button type="button" class="btn btn-success">✓ Mark as read</button>
-                <button type="button" class="btn btn-danger ml-3">X Deny</button>
+                
                        </div>     
             </div>
           </div>
           {% endif %}
           {% endfor %}
           <script>
-            function accepted_request(sender_email,id){
+            function accepted_request(sender_email,id,sender_username,sender_profile_pic){
               var data={
                 id:id,
-                sender_email:sender_email
+                sender_email:sender_email,
+                sender_username:sender_username,
+                sender_profile_pic:sender_profile_pic
               }
               console.log(data)
 

@@ -43,7 +43,7 @@
           <div class="col-lg-7 col-md-10">
             <h1 class="display-2 text-white">Hello {{user_specific_data['username']}}</h1>
             <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
-            <a href="#!" class="btn btn-info">Logout</a>
+            <a href="{{url_for('logout')}}" class="btn btn-info">Logout</a>
           </div>
         </div>
       </div>
@@ -77,16 +77,16 @@
                 <div class="col">
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                     <div>
-                      <span class="heading">22</span>
+                      <span class="heading">{{friend_count}}</span>
                       <span class="description">Friends</span>
                     </div>
                     <div>
-                      <span class="heading">10</span>
-                      <span class="description">Photos</span>
+                      <span class="heading"></span>
+                      <span class="description"></span>
                     </div>
                     <div>
-                      <span class="heading">89</span>
-                      <span class="description">Comments</span>
+                      <span class="heading">{{event_count}}</span>
+                      <span class="description">Event Count</span>
                     </div>
                   </div>
                 </div>
@@ -106,7 +106,7 @@
                 </div>
                 <hr class="my-4">
                 <p>{{user_specific_data['About']}}</p>
-                <a href="#">Show Friends</a>
+                <a href="{{url_for('view_user_friends')}}">Show Friends</a>
               </div>
             </div>
           </div>

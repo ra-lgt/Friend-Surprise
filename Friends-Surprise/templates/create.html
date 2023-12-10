@@ -11,25 +11,28 @@
     <form id="msform">
       <!-- progressbar -->
       <ul id="progressbar">
-        <li class="active">Personal Details</li>
-        <li>Social Profiles</li>
-        <li>Account Setup</li>
+        <li class="active">Getting Started</li>
+        <li>Event Detailss</li>
+        <li>Friends Details</li>
       </ul>
       <!-- fieldsets -->
       <fieldset>
-        <h2 class="fs-title">Personal Details</h2>
-        <h3 class="fs-subtitle">Tell us something more about you</h3>
-        <input type="text" name="fname" placeholder="First Name" />
-        <input type="text" name="lname" placeholder="Last Name" />
-        <input type="text" name="phone" placeholder="Phone" />
+        <h2 class="fs-title">SurpriseMatch Unveiling Joy, One Surprise at a Time!</h2>
+        <h3 class="fs-subtitle">Getting Started Guide</h3>
+        <h4>Step 1: Launch Your Surprise Event</h4>
+        <p>Click "Next" to begin your surprise event planning. Provide event details like the name, description, and date. Your creativity sparks the magic!</p>
+        <h4>Step 2: Algorithm Unleashed</h4>
+        <p>Share your creative event ideas, and let our algorithm work its magic. It randomly matches friends for surprise assignments. Watch the excitement build as emails reveal who will surprise whom!</p>
+        <h4>Step 3: Personalize the Party</h4>
+        <p>Add your friends to the mix! Input their details and let the algorithm weave its surprise magic. Your involvement ensures a personalized and unforgettable experience for everyone involved. Get ready for a unique celebration tailored to your friendships!</p>
         <input type="button" name="next" class="next action-button" value="Next" />
       </fieldset>
       <fieldset>
         <h2 class="fs-title">Event Details</h2>
         <h3 class="fs-subtitle">We'd like to know about your event</h3>
-        <input type="text" name="twitter" placeholder="Event Name" />
-        <input type="text" name="facebook" placeholder="Event Description" />
-        <input type="date" name="gplus" placeholder="Date of the event" />
+        <input type="text" name="e_name" placeholder="Event Name" />
+        <input type="text" name="e_desc" placeholder="Event Description" />
+        <input type="date" name="e_date" placeholder="Date of the event" />
         <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
         <input type="button" name="next" class="next action-button" value="Next" />
       </fieldset>
@@ -38,27 +41,13 @@
           <h3>Choose Your Friends</h3>
           <p>pick all the friends who need to particiapte in this event</p>
           <ul class="ks-cboxtags">
-            <li><input type="checkbox" id="checkboxOne" value="Rainbow Dash"><label for="checkboxOne">Rainbow Dash</label></li>
-            <li><input type="checkbox" id="checkboxTwo" value="Cotton Candy" checked><label for="checkboxTwo">Cotton Candy</label></li>
-            <li><input type="checkbox" id="checkboxThree" value="Rarity" checked><label for="checkboxThree">Rarity</label></li>
-            <li><input type="checkbox" id="checkboxFour" value="Moondancer"><label for="checkboxFour">Moondancer</label></li>
-            <li><input type="checkbox" id="checkboxFive" value="Surprise"><label for="checkboxFive">Surprise</label></li>
-            <li><input type="checkbox" id="checkboxSix" value="Twilight Sparkle" checked><label for="checkboxSix">Twilight
-                            Sparkle</label></li>
-            <li><input type="checkbox" id="checkboxSeven" value="Fluttershy"><label for="checkboxSeven">Fluttershy</label></li>
-            <li><input type="checkbox" id="checkboxEight" value="Derpy Hooves"><label for="checkboxEight">Derpy Hooves</label></li>
-            <li><input type="checkbox" id="checkboxNine" value="Princess Celestia"><label for="checkboxNine">Princess
-                            Celestia</label></li>
-            <li><input type="checkbox" id="checkboxTen" value="Gusty"><label for="checkboxTen">Gusty</label></li>
-            <li class="ks-selected"><input type="checkbox" id="checkboxEleven" value="Discord"><label for="checkboxEleven">Discord</label></li>
-            <li><input type="checkbox" id="checkboxTwelve" value="Clover"><label for="checkboxTwelve">Clover</label></li>
-            <li><input type="checkbox" id="checkboxThirteen" value="Baby Moondancer"><label for="checkboxThirteen">Baby
-                            Moondancer</label></li>
-            <li><input type="checkbox" id="checkboxFourteen" value="Medley"><label for="checkboxFourteen">Medley</label></li>
-            <li><input type="checkbox" id="checkboxFifteen" value="Firefly"><label for="checkboxFifteen">Firefly</label></li>
-          </ul>
+            {% for i in range(count) %}
+            <li><input type="checkbox" id="checkboxOne" name="friendCheckbox" value="{{friend_data['friend_username'][i]}}"><label for="checkboxOne">{{friend_data['friend_username'][i]}}</label></li>
+            {% endfor %}
+           </ul>
           
-        <input type="button" name="next" class="next action-button" value="Submit" />
+          
+        <input type="button" name="next" class="next action-button" onclick="submit_event()" value="Submit" />
         
         </div>
       </fieldset>
@@ -67,6 +56,59 @@
 
   </div>
 </div>
+
+<script>
+function submit_event(){
+  var checkboxes = document.getElementsByName('friendCheckbox');
+  var e_name=document.getElementsByName('e_name')[0].value
+  var e_desc=document.getElementsByName('e_desc')[0].value
+  var e_date=document.getElementsByName('e_date')[0].value
+
+  var checkedValues = [];
+  for (var i = 0; i < checkboxes.length; i++) {
+    
+    if (checkboxes[i].checked) {
+        
+        checkedValues.push(checkboxes[i].value);
+    }
+}
+var today = new Date();
+var userDate = new Date(e_date);
+if (userDate < today) {
+  alert('The provided date is earlier than today.');
+}
+var data={
+  Event_Name:e_name,
+  Event_Desc:e_desc,
+  Event_Date:e_date,
+  Event_Friends:checkedValues
+}
+fetch('/create_event_data', {
+  method: 'POST', // or 'GET' depending on your backend
+  headers: {
+      'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  // Handle the response data
+  if(data['status']==200){
+    var url="{{url_for('sucess',data='Event Created :)')}}"
+    window.location.href = url;
+  }
+  else{
+    var url="{{url_for('error',data='Could not send request',reason='Try to send the request again')}}"
+    window.location.href = url;
+  }
+})
+.catch(error => {
+  // Handle errors
+  console.error('Error sending request:', error);
+});
+
+}
+</script>
 
 <style>
   
