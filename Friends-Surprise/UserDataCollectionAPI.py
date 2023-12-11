@@ -110,6 +110,22 @@ class DataAPI:
             print(e)
             print(file)
             return  False
+        
+    def get_user_data_in_event(self,participants_email):
+        
+        participants_data={}
+        index=0
+        
+        for key,value in participants_email.items():
+            participants_data[index]=list()
+            for email in value:
+                participants_data[index].append(self.get_data_of_specific_user(email))
+                
+            index+=1
+        
+        return participants_data
+                
+                
 
         
         

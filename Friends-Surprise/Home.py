@@ -5,11 +5,13 @@ from send_email import send_email
 import random
 from UserDataCollectionAPI import DataAPI
 from flask_caching import Cache
-from datetime import datetime
+from datetime import datetime,timedelta
 from FriendAPI import FriendAPI
 from Event import Event
 import threading
 import schedule
+import time
+
 
 app = Flask(__name__)
 config=Config()
@@ -384,17 +386,30 @@ def Home():
     return render_template('index.html',session_bool=session_bool)
 
 def check_current_event():
-    print("hell")
+    participants_email=event.check_for_today_event()
+    participants_data=user_dataAPI.get_user_data_in_event(participants_email)
+    send_email.send_email_friends(participants_data)
     
 
-def schedule_for_event():
-    schedule.every().day.at("00:00").do(check_current_event)
+def run_daily_schedule():
     while True:
-        schedule.run_pending()
+        now = datetime.now()
+
+        
+        if datetime(now.year, now.month, now.day, 19, 10) <= now < datetime(now.year, now.month, now.day, 19, 40):
+            check_current_event()
+
+        
+        next_run_time = datetime(now.year, now.month, now.day) + timedelta(days=1, hours=19, minutes=10)
+        time_until_next_run = (next_run_time - now).total_seconds()
+
+        
+        time.sleep(time_until_next_run)
         
 
 if __name__ == '__main__':
-    background_thread = threading.Thread(target=schedule_for_event)
+    check_current_event()
+    background_thread = threading.Thread(target=run_daily_schedule)
     background_thread.daemon = True
     background_thread.start()
     
