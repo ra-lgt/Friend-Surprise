@@ -11,8 +11,8 @@
         {% for i in range(count) %}
       <li class="student-item cf">
           <div class="student-details">
-            {% if friend_data['friend_profile_pic']!="" %}
-              <img class="avatar" src="{{friend_data['friend_profile_pic'][i]}}">
+            {% if friend_data['friend_profile']!="" %}
+              <img class="avatar" src="{{friend_data['friend_profile'][i]}}">
               {% else %}
               <img class="avatar" src="{{url_for('static',filename='images/default_profile.jpg')}}">
               {% endif %}
@@ -234,7 +234,7 @@ function showPage(studentList, pageNum = 1){
 // Search component
 const searchBar = `
     <div class="student-search">
-        <input placeholder="Search for students...">
+        <input placeholder="Search for Friends...">
         <button>Search</button>
     </div>
 `;

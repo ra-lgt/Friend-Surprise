@@ -10,6 +10,7 @@ class send_email:
 	def send_email_friends(participants_data):
 		surprise_algorithm={}
 		index=0
+		print("Email-Starts")
 		
 		for key,value in participants_data.items():
 			
@@ -25,41 +26,36 @@ class send_email:
 						surprise_algorithm[index][value[i]['email']].append(value[0])
 
 					index+=1
-		
-		
-						
-						
-					
-					
-					
-		messages='''
+
+		for key,value in surprise_algorithm.items():
+			for sender_email,reciever_data in value.items():
+				messages='''
 		Subject: 🎉 Jolly Jot - Spread the Joy! 🎁
 
-		Hi [Friend's Name],
+		Hi {0},
 
 		Hope this email finds you well and full of excitement! As part of our "Randomly Surprised" game, it's your turn to spread some joy and surprise a friend. Drumroll, please...
 
-		**Your Surprise Assignment:** [Friend's Name]
+		**Your Surprise Assignment:** To Surprise {1}
 
-		That's right! You've been chosen to surprise [Friend's Name] with a delightful gesture. Whether it's a thoughtful message, a small gift, or a fun activity, the choice is yours! The beauty of it all is the element of surprise.
+		That's right! You've been chosen to surprise {1} with a delightful gesture. Whether it's a thoughtful message, a small gift, or a fun activity, the choice is yours! The beauty of it all is the element of surprise.
 
 		Remember, the surprise is meant to be a joyful mystery, so no need to spill the beans beforehand. Keep it hush-hush until the big reveal.
 
 		Feel free to get creative and make it a moment to remember. The aim is to bring smiles and excitement to our little circle of friends.
 
 		**Important Details:**
-		- **Recipient:** [Friend's Name]
-		- **Deadline:** [Specify a date, if desired, or leave it open-ended for an extra surprise factor]
+		- **Friend's Name:** {1}
+		- **Friend's Email:** {2}
 		- **Have Fun:** The most crucial part! Enjoy the process and the anticipation.
 
 		Let's keep the surprise spirit alive! Looking forward to hearing all about the wonderful surprises that unfold.
 
 		Happy surprising!
 
-		JoY Jot'''
-
-		for key,value in surprise_algorithm.items():
-			for sender_email,reciever_data in value.items():
+		JoY Jot'''.format(sender_email,reciever_data[0]['username'],reciever_data[0]['email'])
+				
+				print("-"*30)
 				env = Environment(loader=FileSystemLoader('./templates'))
 				template_vars = {'sender_email': sender_email, 'reciever_data': reciever_data,'message':messages}
 				template = env.get_template('email-friends.html')

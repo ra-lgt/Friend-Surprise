@@ -69,6 +69,9 @@ class DataAPI:
 
         if (not self.is_url_exists(url)):
             url=""
+        if(url==""):
+            url=self.storage.child("default_profile.jpg").get_url(None) or None
+            
 
         return url
     

@@ -395,20 +395,17 @@ def run_daily_schedule():
     while True:
         now = datetime.now()
 
-        
-        if datetime(now.year, now.month, now.day, 19, 10) <= now < datetime(now.year, now.month, now.day, 19, 40):
+        if datetime(now.year, now.month, now.day, 0, 0) <= now < datetime(now.year, now.month, now.day, 0, 5):
             check_current_event()
 
-        
-        next_run_time = datetime(now.year, now.month, now.day) + timedelta(days=1, hours=19, minutes=10)
-        time_until_next_run = (next_run_time - now).total_seconds()
+            next_run_time = datetime(now.year, now.month, now.day) + timedelta(days=1, hours=0, minutes=0)
+            time_until_next_run = (next_run_time - now).total_seconds()
 
-        
-        time.sleep(time_until_next_run)
+            time.sleep(time_until_next_run)
         
 
 if __name__ == '__main__':
-    check_current_event()
+    
     background_thread = threading.Thread(target=run_daily_schedule)
     background_thread.daemon = True
     background_thread.start()

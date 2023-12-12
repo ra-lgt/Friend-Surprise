@@ -1,6 +1,7 @@
 <html>
 
 <head>
+  <title>Jolly Jolt | Find</title>
   <link rel="stylesheet" href="{{url_for('static',filename='/css/templatemo-chain-app-dev.css')}}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -78,12 +79,46 @@ https://templatemo.com/tm-570-chain-app-dev
           <!-- ***** Menu Start ***** -->
           <ul class="nav">
             {% if true %}
-            <li class="scroll-to-section"><a href="{{url_for('Home')}}" >Home</a></li>
-            <li class="scroll-to-section"><a href="{{url_for ('find_friends')}}"class="active">Find</a></li>
-            <li class="scroll-to-section"><a href="#about">Create Event</a></li>
-            <li class="scroll-to-section"><a href="#pricing">Message</a></li>
-            <li class="scroll-to-section"><a href="#newsletter">Profile</a></li>
-            <li><div class="gradient-button"><a id="modal_trigger" href="{{url_for('logout')}}"><i class="fa fa-sign-in-alt"></i>Logout</a></div></li> 
+            <li class="scroll-to-section">
+              <a href="{{url_for('Home')}}" class="active">
+              <div style="display: flex; align-items: center;">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAABG0lEQVR4nO2Sv0oDQRDGVwtbK0FLERQEY2Y2xjewMZXpFFLkDQRTpxLEShSMM4ukF3wy4WZW059MQiR4nBvuLCz84IPlm9nf/nVuCXmKx2ZXW8N8FUj6QPF6ZulbVonlKVtH0psmx57L8xWzjS2zGlC8NHv6OEjCWo9vexiUfNB2YaGgbasBZWPbMXLWSewsniLLw9F4slnWYzXrAdLbUuD+S76GFK+QZWDj1Cmm/SwDZB0W+pvP7xvAcgdBzlKg4on0BCnee5pszWCj7BBZX4Gk6yoKSLrGmD6QJ93xQc+Tl/uDkLOOMRos219BXSAuzi8DIuvF/L/NbVl1IMmowXF30ZbVArplMv4H4p+/Q3jSljXWclD/faFf0SfCOCGNTFzLtQAAAABJRU5ErkJggg==">
+              <span>Home</span>
+            </div>
+            </a>
+          </li>
+            <li class="scroll-to-section">
+              <a href="{{url_for ('find_friends')}}">
+                <div style="display: flex; align-items: center;">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB80lEQVR4nM2VS08UQRDHZyHRKBJDCCTcNSbLa7p7SQxfARNPPs6iV1AeR4Lx7sEAg1W7ZFmFmGA4wZUvwtFIiBG2une9N6me2XUhG2ZaWLWSTicz1fXrrq76dxD8c1u2XQrqoxLNIwH6Oc+FUn2Ev1859r0PhzfjoHpXgD64OCToXfFRP8vv2Bt/BBiL6oOyqOF30GpZgHkjkV7xLECXW2AQbtQGvAAKqncF0FYSpDyOFLbzK5RICNSbCejzZMn2ZoegeRcDzOrYp+Oey3zzqz/uCKS1xP9tJsA4ng7HC2hvYuV7f5Y1ExXTL0Dv8bpw/SSfukCCmU0gLwIPC7E27SBQnUl1blxouG7u+0AK0c8HjQJJh6DeZ+eH77/d8oEoOLrtIKj3OwixHpC/kS5VNDMxhKZ9IAropesXpNepzlyCzRKumEwlHG7UBholzCfKtCtuqji/tMbNltqMQBH7q6JeCrIaywPLRHKRmwpItvNTQFIAVZoahrQYWJvLDOIUsPA1BZI1CmnOCSTSXGvw1hECzXuBWMIl6qdO0ttL/df4KaDFK4GcLduuQnQ6osBMcVCFtcf8aD3Zsd3uv7U5CWbh/AZowR+UajbH5XsO5HtH/xfIXkgdmu3RSPddLyRwJHciifRFwa+hDgAaHJvr0AkutzP7B6N0tnYAcgAAAABJRU5ErkJggg==">
+                <span>Search</span>
+              </div>
+              </a>
+            </li>
+            <li class="scroll-to-section">
+              <a href="{{url_for('create_event')}}">
+              <div style="display: flex; align-items: center;">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA50lEQVR4nO3UOwoCMRAA0LXUA4iF2OlWymayijew9QJWnkbw061OQC0UtRc8kO2CmfXXrgz+ChX3IzY6EEI+85gkEMOIGdXOOgmKWoCEJWeXjo0JpB4oqkncFRm9LUo85mCw6QLSRKCevmuAeiGQloxxPvdc6Q1kzOp7+bCVGReMxzx/B5FGH8PCgJbaNkHpuURdf4kFB/0EKBqWx/sMoJ5dMYFeIxJoO64JSq8Y5UqvlcGz3CCgRD/17OEgKvgq4A/+8B12SsorhMVsxzUFUvthQeImx2jQ7+v8hfFealfUIRv1dN+PE3pr2916ygmHAAAAAElFTkSuQmCC">
+                <span>Create Event</span>
+              </div>
+              </a>
+            </li>
+            <li class="scroll-to-section">
+              <a href="{{url_for('notification')}}">
+              <div style="display: flex; align-items: center;">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA90lEQVR4nO3UsU4CQRAG4JWGllYKtCDYsc4sD0Bpgo8gr0C8AhItNEE7C3INd7PcU/g4vsIlO7uJsT0yAQoLILnVhIJJppni23+nGKX+o7pp1dQZD9G6+zqtMx6KsdFeqwaQX0AeHuqCQG4shlgKCneF5J9if4m5ezb001F9G3pAIYkFgUIi1hmsX3DeYfJnO4SibBsb5rEgWn439H251XkmqLyClh/1glsyHyzLG5kda6TwhpanvyMXZVsiI/mX28xpVVUXYP0HrFxf5ofa7JLti64zvjarMJFLErUHQ2GE5D/B+hRyfxeFbUBGyP2gm35tj+UJ1BpBoP51wUxkdwAAAABJRU5ErkJggg==">
+                <span>Message</span>
+              </div>
+              </a>
+            </li>
+            <li class="scroll-to-section">
+              <a href="{{url_for('profile')}}">
+                <div style="display: flex; align-items: center;">
+                  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAACOUlEQVR4nJ1VzWvUQBTPnqrrRVC8KEqh0ovsZmZqrSCuBw+u9qIe1NazqEc/8KMFrXgQRGu6spv3Uqh69T/yKCwe6s682dJz5CVNdjNpbPXBQPLy3m9+7zOet4e0NuIDs7h9gg8/e/8jjW+/DkmkRYm2I9B8kkgv+aTPtqMiWlAQ1/cFpqKtSxIIfLDtuQ8/D7rfWacie1VGbKNbfwXzke4IsK+z0M5+tUdkRPdkqD9KoHcKhhc8L65lwALMGxHSrUpmDObFqUNzwxyWaEKJv+f4guQd6KFE01EwPJo4xXEtAV0fXiznLCIYD1GE9q4PdNm9WIT2vAJ6kBOBfp19CznlAnDOCo5Iz8S6PuUCJmlA87YQHdhrCvTCyBnsZ7cAAum+iHTDBWygmVRAz4uA/TpXP38RQKul0MDclKjnXb0Pg3aBzY4IMEFSTG5YAbTkOeKDeTzTHZxx9awTaB65eoG03PyyfbwSUIE9x63i6pP2iWi2BAi0xFiVISfOSK9mupvTI3ab06zbzVZkIVcVhSVhjxSMhRUkLErR9EdF2WGyyOPkGvKNEuzaKFy7ttuCkKjnC4XKGptvSjVxjVtGIL2XaK7nDENzg3V+TzezEVTMDpzGzkcPzYoI6QobSDRP/Z497bJhnQT7JF0Og3bqo4ujN0os3ZZA3xvdrWPeHsI2bCuqlkPOAHSLlwLndCr4MeF+nwriCR41CaZXyax0+/iCBVqVQC/4pAvW/NuCdYWrqkCf5LOfX8Afd99k0lfBrPgAAAAASUVORK5CYII=">
+                  <span>Profile</span>
+                </div>
+
+              </a></li>
             {% else %}
             <li><div class="gradient-button"><a id="modal_trigger" href="{{url_for('signup_login')}}"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li> 
             {% endif %}
@@ -197,8 +232,8 @@ https://templatemo.com/tm-570-chain-app-dev
 <div id="sandbox">
 
     <div class="sideb">
-      <h2 class="theme-color">We’re Hiring</h2>
-      <p class="text-large theme-color">Excited to work with us? Join Our Team</p>
+      <h2 class="theme-color">Find Friends</h2>
+      <p class="text-large theme-color">Join with others :)</p>
       <input class="search" placeholder="Search" />
       <div class="mobFilter"><i class="fas fa-sliders-h"></i></div>
       <div class="porpSection">
